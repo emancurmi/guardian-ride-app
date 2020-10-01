@@ -79,7 +79,7 @@ h6 {
 
 /*Linear - Background*/
 
-.light {
+.white {
     padding-top: 70px;
     background-color: #ffffff !important;
     margin-bottom: 0;
@@ -88,7 +88,47 @@ h6 {
     font-size: 21px;
     font-weight: 200;
     padding-bottom: 70px;
-    padding-top:70px;
+    padding-top: 70px;
+}
+
+    .white h1 {
+        color: #24262e;
+    }
+
+    .white h2 {
+        color: #24262e;
+    }
+
+    .white h3 {
+        color: #24262e;
+    }
+
+    .white h4 {
+        color: #83909a;
+    }
+
+    .white h5 {
+        color: #83909a;
+    }
+
+    .white h6 {
+        color: #83909a;
+    }
+
+    .white p {
+        color: #52535b;
+    }
+
+.light {
+    padding-top: 70px;
+    background-color: #F1F3F2 !important;
+    margin-bottom: 0;
+    margin-top: 0;
+    line-height: 35px;
+    font-size: 21px;
+    font-weight: 200;
+    padding-bottom: 70px;
+    padding-top: 70px;
 }
 
     .light h1 {
@@ -210,7 +250,7 @@ linear-light, h2, h5 {
     width: 100%;
     color: #ffffff;
     padding-bottom: 70px;
-    padding-top: 70px;
+    padding-top: 100px;
 }
 
 linear-dark, h1, h4 {
@@ -270,7 +310,7 @@ button {
     transform-origin: 50% 50% 0px;
 }
 
-button, .white {
+button, .clear {
     color: rgb(255, 255, 255);
     border-color: rgb(255, 255, 255);
 }
@@ -280,12 +320,36 @@ button, .blue {
     border-color: rgb(0, 210, 212);
 }
 
-breaker {
-    /*background-image: url("./imgs/slice-1-2.jpg");*/
+.breaker {
+    min-height:322px;
+    background-image: url(./Images/slice-1-2.jpg);
 }
 
 /*Tablet Version Codes*/
 @media(min-width: 750px) {
+    .col-1 {
+        width: 100%;
+    }
+
+    .col-2 {
+        width: 100%;
+    }
+
+    .col-3 {
+        width: 33.33%;
+    }
+
+    .col-4 {
+        width: 50%;
+    }
+
+    .col-5 {
+        width: 50%;
+    }
+
+    .col-6 {
+        width: 33.33%;
+    }
 }
 
 
@@ -313,5 +377,15 @@ breaker {
 
     .col-6 {
         width: 16.66%;
+    }
+
+    nav {
+        background-color: #24262e !important;
+        margin-bottom: 0;
+        margin-top: 0;
+        line-height: 35px;
+        font-size: 21px;
+        font-weight: 200;
+        z-index: 999999;
     }
 }
