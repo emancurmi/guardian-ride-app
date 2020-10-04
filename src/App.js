@@ -6,6 +6,7 @@ import Nav from './Components/Nav/Nav';
 import Footer from './Components/Footer/Footer';
 
 import Home from './Components/Home/Home';
+import SignUp from './Components/SignUp/SignUp';
 
 import './App.css';
 
@@ -17,8 +18,9 @@ class App extends Component {
                 <Nav />
                 <div className='App'>
                     <Route path="/" component={Home} exact />
+                    <Route path="/signup" component={SignUp} exact />
                 </div>
-                
+                <Footer />
             </BrowserRouter>
         );
     }

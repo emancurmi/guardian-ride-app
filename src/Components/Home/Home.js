@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+
 import './Home.css';
 
 export default class Home extends Component {
+
+    nextPath(path) {
+        this.props.history.push(path)
+    }
+
     render() {
         return (
            <div className="column center">
@@ -16,7 +23,7 @@ export default class Home extends Component {
                                     <h1>Guardian Ride</h1>
                                     <div className="row center spacebetween">
                                         <button className="clear">About Us</button>
-                                        <button className="blue">Sign Up</button>
+                                        <button className="blue" onClick={() => this.nextPath('/SignUp') }>Sign Up</button>
                                     </div>
                                 </div>
                             </div>
