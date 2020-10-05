@@ -7,6 +7,7 @@ import Footer from './Components/Footer/Footer';
 
 import Home from './Components/Home/Home';
 import SignUp from './Components/SignUp/SignUp';
+import SignedIn from './Components/SignedIn/SignedIn';
 
 import './App.css';
 
@@ -19,6 +20,7 @@ class App extends Component {
                 <div className='App'>
                     <Route path="/" component={Home} exact />
                     <Route path="/signup" component={SignUp} exact />
+                    <Route path="/signedin" component={SignedIn} exact />
                 </div>
                 <Footer />
             </BrowserRouter>

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Playfair+Display:700|IBM+Plex+Sans:500&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display:700|IBM+Plex+Sans:500&display=swap');
 
 :root {
     --color-primary: #6b7a8f;
@@ -9,23 +9,16 @@
     --base-ease: cubic-bezier(0.25, 0.46, 0.45, 0.84);
 }
 
-// =========================
-// Global
-// =========================
-
-*,
-*:before,
-*:after {
+*, *:before, *:after {
     box-sizing: border-box;
 }
 
-html,
-body {
+html, body {
     height: 100%;
 }
 
 body {
-    font-family: "IBM Plex Sans", sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
     background-color: var(--color-secondary);
 }
 
@@ -38,10 +31,8 @@ body {
     width: 100%;
 }
 
-h1,
-h2,
-h3 {
-    font-family: "Playfair Display", serif;
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
 }
 
 .visuallyhidden {
@@ -53,18 +44,10 @@ h3 {
     width: 1px;
 }
 
-// =========================
-// Icons
-// =========================
-
 .icon {
     fill: var(--color-primary);
     width: 100%;
 }
-
-// =========================
-// Buttons
-// =========================
 
 .btn {
     background-color: var(--color-primary);
@@ -75,24 +58,18 @@ h3 {
     font-family: inherit;
     font-size: inherit;
     padding: 1rem 2.5rem 1.125rem;
-    &:focus
-
-{
-    outline-color: var(--color-focus);
-    outline-offset: 2px;
-    outline-style: solid;
-    outline-width: 3px;
 }
 
-&:active {
-    transform: translateY(1px);
-}
+    .btn:focus {
+        outline-color: var(--color-focus);
+        outline-offset: 2px;
+        outline-style: solid;
+        outline-width: 3px;
+    }
 
-}
-
-// =========================
-// Slider controls
-// =========================
+    .btn:active {
+        transform: translateY(1px);
+    }
 
 .slider__controls {
     display: flex;
@@ -100,35 +77,28 @@ h3 {
     position: absolute;
     top: calc(100% + 1rem);
     width: 100%;
-    .btn
-
-{
-    --size: 3rem;
-    align-items: center;
-    background-color: transparent;
-    border: 3px solid transparent;
-    border-radius: 100%;
-    display: flex;
-    height: var(--size);
-    padding: 0;
-    width: var(--size);
-    &:focus
-
-{
-    border-color: var(--color-focus);
-    outline: none;
 }
 
-&--previous > * {
-    transform: rotate(180deg);
-}
+    .slider__controls .btn {
+        --size: 3rem;
+        align-items: center;
+        background-color: transparent;
+        border: 3px solid transparent;
+        border-radius: 100%;
+        display: flex;
+        height: var(--size);
+        padding: 0;
+        width: var(--size);
+    }
 
-}
-}
+        .slider__controls .btn:focus {
+            border-color: var(--color-focus);
+            outline: none;
+        }
 
-// =========================
-// Slider
-// =========================
+    .slider__controls .btn--previous > * {
+        transform: rotate(180deg);
+    }
 
 .slider {
     --slide-size: 70vmin;
@@ -146,10 +116,6 @@ h3 {
     transition: transform var(--base-duration) cubic-bezier(0.25, 1, 0.35, 1);
 }
 
-// =========================
-// Slide
-// =========================
-
 .slide {
     align-items: center;
     color: white;
@@ -165,37 +131,27 @@ h3 {
     transition: opacity calc(var(--base-duration) / 2) var(--base-ease), transform calc(var(--base-duration) / 2) var(--base-ease);
     width: var(--slide-size);
     z-index: 1;
-    &--previous, &--next
+}
 
-{
-    &:hover
-
-{
+.slide--previous:hover, .slide--next:hover {
     opacity: 0.5;
 }
 
-}
-
-&--previous {
+.slide--previous {
     cursor: w-resize;
-    &:hover
-
-{
-    transform: translateX(2%);
 }
 
-}
+    .slide--previous:hover {
+        transform: translateX(2%);
+    }
 
-&--next {
+.slide--next {
     cursor: e-resize;
-    &:hover
-
-{
-    transform: translateX(-2%);
 }
 
-}
-}
+    .slide--next:hover {
+        transform: translateX(-2%);
+    }
 
 .slide--current {
     --x: 0;
@@ -204,11 +160,11 @@ h3 {
     opacity: 1;
     pointer-events: auto;
     user-select: auto;
+}
 
-    @media (hover: hover) {
-        &:hover .slide__image-wrapper {
-            transform: scale(1.025) translate( calc(var(--x) / var(--d) * 1px), calc(var(--y) / var(--d) * 1px) );
-        }
+@media (hover: hover) {
+    .slide--current:hover .slide__image-wrapper {
+        transform: scale(1.025) translate(calc(var(--x) / var(--d) * 1px), calc(var(--y) / var(--d) * 1px));
     }
 }
 
@@ -236,11 +192,11 @@ h3 {
     transition: opacity var(--base-duration) var(--base-ease), transform var(--base-duration) var(--base-ease);
     user-select: none;
     width: 110%;
+}
 
-    @media (hover: hover) {
-        .slide--current & {
-            transform: translate( calc(var(--x) / var(--d) * 1px), calc(var(--y) / var(--d) * 1px) );
-        }
+@media (hover: hover) {
+    .slide--current .slide__image {
+        transform: translate(calc(var(--x) / var(--d) * 1px), calc(var(--y) / var(--d) * 1px));
     }
 }
 
@@ -257,35 +213,29 @@ h3 {
     position: relative;
     transition: transform var(--base-duration) var(--base-ease);
     visibility: hidden;
-    .slide--current &
+}
 
-{
+.slide--current .slide__content {
     animation: fade-in calc(var(--base-duration) / 2) var(--base-ease) forwards;
     visibility: visible;
+}
 
-    @media (hover: hover) {
-        transform: translate( calc(var(--x) / var(--d) * -1px), calc(var(--y) / var(--d) * -1px) );
+@media (hover: hover) {
+    .slide--current .slide__content {
+        transform: translate(calc(var(--x) / var(--d) * -1px), calc(var(--y) / var(--d) * -1px));
     }
 }
 
-> * + * {
+.slide__content > * + * {
     margin-top: 2rem;
 }
 
-}
-
-// =========================
-// Animations
-// =========================
-
 @keyframes fade-in {
-    from
+    from {
+        opacity: 0;
+    }
 
-{
-    opacity: 0;
-}
-
-to {
-    opacity: 1;
-}
+    to {
+        opacity: 1;
+    }
 }

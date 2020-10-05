@@ -30,27 +30,31 @@ nav {
 }
 
 h1 {
-    font-size: 80px;
-}
-
-h2 {
-    font-size: 60px;
-}
-
-h3 {
     font-size: 40px;
 }
 
+h2 {
+    font-size: 30px;
+}
+
+h3 {
+    font-size: 25px;
+}
+
 h4 {
-    font-size: 36px;
+    font-size: 23px;
 }
 
 h5 {
-    font-size: 28px;
+    font-size: 20px;
 }
 
 h6 {
-    font-size: 20px;
+    font-size: 18px;
+}
+
+p { 
+    font-size: 18px;
 }
 
 .col-1 {
@@ -275,6 +279,9 @@ linear-dark, h2, h5 {
 
 .center {
     text-align: center;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
 }
 
 .spacebetween {
@@ -321,7 +328,7 @@ button, .blue {
 }
 
 .breaker {
-    min-height:350px;
+    min-height:270px;
     background-size: 100%;
     background-image: url(./Images/slice-1-2.jpg);
 }
@@ -356,6 +363,32 @@ button, .blue {
 
 /*Computer Version Codes*/
 @media(min-width: 1024px) {
+    h1 {
+        font-size: 80px;
+    }
+
+    h2 {
+        font-size: 60px;
+    }
+
+    h3 {
+        font-size: 40px;
+    }
+
+    h4 {
+        font-size: 36px;
+    }
+
+    h5 {
+        font-size: 28px;
+    }
+
+    h6 {
+        font-size: 20px;
+    }
+    p{
+        font-size: 11px;
+    }
     .col-1 {
         width: 100%;
     }

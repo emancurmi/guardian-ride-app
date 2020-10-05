@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+
 import './Login.css';
+
 export default class Login extends Component {
+
+    nextPath(path) {
+        this.props.history.push(path)
+    }
+
     render() {
         return (
             <div>
@@ -10,7 +18,7 @@ export default class Login extends Component {
                     <br/>
                     <input type="Password" placeholder="Pin" />
                     <br />
-                    <button className="blue" onClick={() => this.nextPath('/SignUp')}>Login</button>
+                    <button className="blue" onClick={() => this.nextPath('/signedin')}>Login</button>
                 </form>
             </div>
         )
