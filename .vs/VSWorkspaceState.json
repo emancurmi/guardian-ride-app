@@ -3,14 +3,11 @@
     "",
     "\\src",
     "\\src\\Components",
-    "\\src\\Components\\Footer",
-    "\\src\\Components\\Header",
-    "\\src\\Components\\Home",
-    "\\src\\Components\\Nav",
-    "\\src\\Components\\SignedIn",
-    "\\src\\Components\\Slide",
-    "\\src\\Components\\Slider"
+    "\\src\\Components\\AddDrinkBtn",
+    "\\src\\Components\\Bar",
+    "\\src\\Components\\Drink",
+    "\\src\\Components\\SignedIn"
   ],
-  "SelectedNode": "\\src\\App.js",
+  "SelectedNode": "\\src\\Components\\Bar\\Bar.js",
   "PreviewInSolutionExplorer": false
 }
