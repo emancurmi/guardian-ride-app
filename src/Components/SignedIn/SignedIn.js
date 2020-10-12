@@ -5,23 +5,21 @@ import config from '../../config';
 import engine from '../../engine';
 import AddDrinkBtn from '../AddDrinkBtn/AddDrinkBtn';
 import Loader from '../Loader/Loader';
-import { Redirect } from 'react-router-dom';
-import { bake_cookie, read_cookie, delete_cookie } from 'sfcookies';
+import { read_cookie } from 'sfcookies';
 
 export default class SignedIn extends Component {
-
-    
 
     constructor(props) {
 
         super(props);
-        if (read_cookie('idcrypt').length == 0) {
+        if (read_cookie(config.cookie_key).length === 0) {
             props.history.push('/signup');
         }
+
         this.state = {
             config: config,
             drinkData: [],
-            userid: engine.decrypt(read_cookie('idcrypt')),
+            userid: engine.decrypt(read_cookie(config.cookie_key)),
             userData: [], 
             error: null,
             isLoading: true
@@ -68,9 +66,7 @@ export default class SignedIn extends Component {
     }
 
     fetchfavouritedrinks = () => {
-
-        console.log(this.state.config.API_ENDPOINT + 'drink/')
-        fetch(this.state.config.API_ENDPOINT + 'drink/', {
+        fetch(this.state.config.API_ENDPOINT + 'user_drink/?userid=' + this.state.userid, {
             method: 'GET',
             headers: {
                 'content-type': 'application/json',
@@ -83,7 +79,9 @@ export default class SignedIn extends Component {
                 }
                 return res.json()
             })
+
             .then(this.setDrinkData)
+
             .catch(error => {
                 console.error(error)
                 this.setState({ error })

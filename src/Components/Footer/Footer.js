@@ -14,22 +14,22 @@ export default class Footer extends Component {
                         <div className="column col-4 center">
                             <h6>News Letter Signup</h6>
                             <form>
-                                <input type="email" placeholder="E-mail" />
+                                <input type="email" placeholder="E-mail" /><br />
                                 <button className="blue">Sign Up</button>
                             </form>
                         </div>
                         <div className="column col-4 center">
                             <h6>Contact Us</h6>
                             <form>
-                                <input type="text" placeholder="Name" />
-                                <input type="email" placeholder="E-mail" />
-                                <input type="text" placeholder="Comment" rows="5" />
+                                <input type="text" placeholder="Name" /><br />
+                                <input type="email" placeholder="E-mail" /><br />
+                                <input type="text" placeholder="Comment" rows="5" /><br />
                                 <button className="blue">Submit</button>
                             </form>
                         </div>
                         <div className="column col-4">
                             <h6>Address</h6>
-                            <p>Guardian Ride Development<br/>
+                            <p>Guardian Ride Development<br />
                             10880 Malibu Point,<br />
                             Florida
                             </p>

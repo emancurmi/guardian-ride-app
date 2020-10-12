@@ -6,7 +6,7 @@ export default class Drink extends Component {
         super(props)
 
         this.state = {
-            id:props.key,
+            id:props.id,
             name: props.name,
             value: props.value
         }

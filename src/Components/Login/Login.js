@@ -3,13 +3,12 @@ import { Redirect } from 'react-router-dom';
 import config from '../../config';
 import engine from '../../engine';
 import './Login.css';
-import { bake_cookie, read_cookie, delete_cookie } from 'sfcookies';
+import { bake_cookie, read_cookie } from 'sfcookies';
 
 export default class Login extends Component {
 
     constructor(props) {
 
-        const cookie_key = 'idcrypt';
 
         super(props);
 
@@ -35,11 +34,12 @@ export default class Login extends Component {
             isLoading: false,
             redirect: true
         })
-        bake_cookie('idcrypt', engine.encrypt(this.state.userid.toString()));
+        bake_cookie(config.cookie_key, engine.encrypt(this.state.userid.toString()));
+        
     }
 
     renderRedirect = () => {
-        if (read_cookie('idcrypt').length !== 0) {
+        if (read_cookie(config.cookie_key).length !== 0) {
             return <Redirect to='/SignedIn/' />
         }
 
@@ -58,7 +58,7 @@ export default class Login extends Component {
 
         this.setState({ error: null })
 
-        fetch(this.state.config.API_ENDPOINT + 'user/'+'?userphone=' + user.userphone + '&userpin=' + user.userpin, {
+        fetch(this.state.config.API_ENDPOINT + 'user/?userphone=' + user.userphone + '&userpin=' + user.userpin, {
             method: 'GET',
             headers: {
                 'content-type': 'application/json',

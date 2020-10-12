@@ -33,6 +33,7 @@ export default class Bar extends Component {
                             return (
                                 <Drink
                                     key={drink.drinkid}
+                                    id={drink.drinkid}
                                     name={drink.drinkname}
                                     value={drink.drinkalcoholvalue}
                                 //handleSlideClick={this.handleSlideClick}
