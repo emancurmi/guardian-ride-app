@@ -7,6 +7,7 @@ import { read_cookie } from 'sfcookies';
 import { Redirect } from 'react-router-dom'
 
 export default class SignUp extends Component {
+
     renderRedirect = () => {
         if (read_cookie(config.cookie_key).length !== 0) {
             return <Redirect to='/SignedIn/' />
@@ -22,7 +23,7 @@ export default class SignUp extends Component {
                 <div className="linear-dark">
                     <div className="row center">
                         <div className="col-2">
-                                <Login />
+                            <Login handleLogIn={this.props.handleLogIn}/>
                         </div>
                         <div className="col-2">
                                 <Register />

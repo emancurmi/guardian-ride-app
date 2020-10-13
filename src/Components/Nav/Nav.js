@@ -25,7 +25,7 @@ export default class Nav extends Component {
                         }
                         {(read_cookie(config.cookie_key).length !== 0) ? <li><Link to="/SignedIn">Dashboard</Link></li> : ""}
                         {(read_cookie(config.cookie_key).length !== 0) ? <li><Link to="/Profile">Profile</Link></li> : ""}
-                        {(read_cookie(config.cookie_key).length !== 0) ? <li><Link to="/SignOut">Log Out</Link></li> : <li><Link to="/SignUp">Log In</Link></li>}
+                        {(read_cookie(config.cookie_key).length !== 0) ? <li><Link to="/SignOut" >Log Out</Link></li> : <li><Link to="/SignUp">Log In</Link></li>}
                     </ul>
                 </div>
             </nav>

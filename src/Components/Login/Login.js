@@ -35,14 +35,14 @@ export default class Login extends Component {
             redirect: true
         })
         bake_cookie(config.cookie_key, engine.encrypt(this.state.userid.toString()));
-        
+        this.props.handleLogIn();
+        this.renderRedirect();
     }
 
     renderRedirect = () => {
         if (read_cookie(config.cookie_key).length !== 0) {
             return <Redirect to='/SignedIn/' />
         }
-
     }
 
     handleSubmit = e => {
@@ -91,7 +91,7 @@ export default class Login extends Component {
                 <h1>Login</h1>
                 <form onSubmit={this.handleSubmit} >
                     <input type="Text" id="userphone" name="userphone" placeholder="Phone number" title="Enter Phone Number" required /><br />
-                    <input type="Text" id="userpin" name="userpin" placeholder="PIN number" title="Enter Pin Number" required /><br />
+                    <input type="Password" id="userpin" name="userpin" placeholder="PIN number" title="Enter Pin Number" required /><br />
                     <button id="btnSubmit" className="blue" type="submit">Sign In</button>
                 </form>
             </div>

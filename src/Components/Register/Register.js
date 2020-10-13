@@ -32,12 +32,14 @@ export default class Register extends Component {
             redirect: true
         })
         bake_cookie(config.cookie_key, engine.encrypt(this.state.userid.toString()));
+        this.props.handleLogIn();
         this.renderRedirect();
     }
 
 
     renderRedirect = () => {
         if (read_cookie(config.cookie_key).length !== 0) {
+
             return <Redirect to='/SignedIn/' />
         }
     }

@@ -15,6 +15,22 @@ import SignOut from './Components/SignOut/SignOut';
 import Profile from './Components/Profile/Profile';
 
 class App extends Component {
+    state = {
+        isLoggedin: false
+    }
+
+    handleLogIn = () => {
+        this.setState({
+            isLoggedin: true
+        })
+    }
+
+    handleLogOut = () => {
+        this.setState({
+            isLoggedin: false
+        })
+    }
+
     render() {
         return (
             <BrowserRouter>
@@ -22,10 +38,18 @@ class App extends Component {
                 <Nav />
                 <div className='App'>
                     <Route path="/" component={Home} exact />
-                    <Route path="/signup" component={SignUp} exact />
+
+                    <Route path="/signup" exact render={(routeProps) => {
+                        return <SignUp handleLogIn={this.handleLogIn} {...routeProps} />
+                    }} />
+
                     <Route path="/signedin" component={SignedIn} exact />
                     <Route path="/addfavdrink" component={AddFavDrink} exact />
-                    <Route path="/signout" component={SignOut} exact />
+
+                    <Route path="/signout" exact render={(routeProps) => {
+                        return <SignOut handleLogOut={this.handleLogOut} {...routeProps} />
+                    }} />
+
                     <Route path="/profile" component={Profile} exact />
                 </div>
                 <Footer />
