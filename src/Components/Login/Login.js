@@ -24,7 +24,6 @@ export default class Login extends Component {
     }
 
     setUser = user => {
-        console.log(user);
         this.setState({
             userid: user[0].userid,
             username: user[0].username,

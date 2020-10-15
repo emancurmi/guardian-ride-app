@@ -9,12 +9,52 @@ export default class Bar extends Component {
         super(props)
 
         this.state = {
-            drinkData: props.drinkData
+            dataDrinkUserIds: this.props.dataDrinkUserIds,
+            drinkData: []
         }
     }
 
+    setDrinkData = data => {
+        this.setState({
+            drinkData: data
+        })
+    }
+
+    fetchDrinkData = () => {
+        this.state.dataDrinkUserIds.map(drink => {
+
+            //console.log(drink);
+            fetch(this.state.config.API_ENDPOINT + 'drink/' + drink.drinkid, {
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json',
+                    'Authorization': `Bearer ${this.state.config.API_TOKEN}`
+                }
+            })
+                .then(res => {
+                    if (!res.ok) {
+                        return res.json().then(error => Promise.reject(error))
+                    }
+                    return res.json()
+                })
+
+                .then(data => {
+                    console.log(data);
+                    this.setDrinkData(data);
+
+                })
+
+                .catch(error => {
+                    console.error(error)
+                    this.setState({ error })
+                })
+
+        })
+    }
+
     componentDidMount() {
-        console.log(this.state.drinkData);
+        this.fetchDrinkData();
+        console.log(this.state.dataDrinkUserIds);
     }
 
     render() {

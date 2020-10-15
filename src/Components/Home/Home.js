@@ -15,7 +15,7 @@ export default class Home extends Component {
                 <div className="linear-dark">
                     <div className="row center">
                         <div className="col-2">
-                            <img src="logo.png" style={{"width":"100%"}} />
+                            <img alt="logo" src="logo.png" style={{"width":"100%"}} />
                         </div>
                         <div className="col-2">
                             <div className="column">

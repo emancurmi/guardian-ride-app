@@ -56,9 +56,9 @@ export default class AddFavDrink extends Component {
             })
     }
 
-    fetchdrinkbyid = (drinkid) => {
+    fetchdrinkbyname = (drinkname) => {
 
-        fetch(this.state.config.API_ENDPOINT + 'drink/'+ drinkid, {
+        fetch(this.state.config.API_ENDPOINT + 'drink/?drinkname='+ drinkname , {
             method: 'GET',
             headers: {
                 'content-type': 'application/json',
@@ -87,17 +87,16 @@ export default class AddFavDrink extends Component {
         }
         catch (e) { console.log(e) }
     }
-
-    componentWillMount = () => {
-        this.selectedCheckboxes = new Set();
-    }
+    
 
     toggleCheckbox = drink => {
-        if (this.selectedCheckboxes.has(drink.drinkname)) {
-            this.selectedCheckboxes.delete(drink.drinkname);
-        } else {
-            this.selectedCheckboxes.add(drink.drinkname);
+        if (this.state.selectedDrinks.findIndex(e => e === drink) !== -1) {
+            this.state.selectedDrinks.splice(this.state.selectedDrinks.findIndex(e => e === drink), 1)
         }
+        else {
+            this.state.selectedDrinks.push(drink);
+        }
+
     }
 
     createCheckbox = drink => (
@@ -125,6 +124,43 @@ export default class AddFavDrink extends Component {
             drinkData: [...this.state.drinkData, drink],
         })
     }
+
+    pushtodb = drink => {
+        
+            const drinkuserlink = {
+                drinkid: drink.drinkid,
+                userid: this.state.userid,
+                userdrinktime: "0000000000000" //1602644590339
+            }
+
+            console.log(drinkuserlink);
+
+            fetch(this.state.config.API_ENDPOINT + 'user_drink/', {
+                method: 'POST',
+                body: JSON.stringify(drinkuserlink),
+                headers: {
+                    'content-type': 'application/json',
+                    'authorization': `bearer ${this.state.config.API_TOKEN}`
+                }
+            })
+
+                .then(res => {
+                    if (!res.ok) {
+                        return res.json().then(error => Promise.reject(error));
+                    }
+                    return res.json();
+                })
+
+                .then(data => {
+                    console.log(data);
+                })
+
+                .catch(error => {
+                    console.error(error);
+                    this.setState({ error })
+                })
+        }
+    
 
     handleCreateDrinkSubmit = e => {
 
@@ -186,59 +222,12 @@ export default class AddFavDrink extends Component {
 
         e.preventDefault();
 
-        ////----- Checkbox Section Processing -----////
-
-        //check if anything is selected from checkboxes
-
-        if (this.selectedCheckboxes.length !== 0) {
-            for (const checkbox of this.selectedCheckboxes) {
-                //this.fetchdrinkbyid(checkbox.key);
-                console.log(checkbox);
-            }
+        
+        for (const checkbox of this.state.selectedDrinks) {
+            this.fetchdrinkbyname(checkbox)
         }
 
-
-
-
-        ////----- Link Adding -----////
-
-        //if drinkdata is not empty start linking
-        //if (!this.state.drinkData.length) {
-        //    const drinkuserlink = {
-        //        drinkid: this.state.drinkid,
-        //        userid: this.state.userid
-        //    }
-
-        //    fetch(this.state.config.API_ENDPOINT + 'user_drink/', {
-        //        method: 'POST',
-        //        body: JSON.stringify(drink),
-        //        headers: {
-        //            'content-type': 'application/json',
-        //            'authorization': `bearer ${this.state.config.API_TOKEN}`
-        //        }
-        //    })
-
-        //        .then(res => {
-        //            if (!res.ok) {
-        //                return res.json().then(error => Promise.reject(error));
-        //            }
-        //            return res.json();
-        //        })
-
-        //        .then(data => {
-        //            drinkname.value = '';
-        //            drinkalcoholvalue.value = '';
-        //            this.AddFavDrink(drink);
-        //        })
-
-        //        .catch(error => {
-        //            console.error(error);
-        //            this.setState({ error })
-        //        })
-        //}
-        //else {
-        //    //set state error to form or checkbox required. 
-        //}
+        this.state.drinkuserslinkData.forEach(this.pushtodb)
     }
 
     render() {
