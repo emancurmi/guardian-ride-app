@@ -221,7 +221,7 @@ export default class Profile extends Component {
                                     <input type="Text" id="userphone" name="userphone" value={this.state.userData.userphone} placeholder="Phone number" /><br />
                                     <label htmlFor="userpin">Your Pin: </label>
                                     <input type="Text" id="userpin" name="userpin" value={this.state.userData.userpin} placeholder="PIN number" /><br />
-                                    <button id="btnSubmit" className="blue" type="submit">Update</button>
+                                    <button id="btnSubmit" className="blue" type="submit">Update User Info</button>
                                 </form>
                             </div>
                         </div>
@@ -234,7 +234,7 @@ export default class Profile extends Component {
                                     <input type="Text" id="guardianname" name="guardianname" value={this.state.guardianData.guardianname} placeholder="Guardian Name" /><br/>
                                     <label htmlFor="guardianphone">Guardian Number: </label>
                                     <input type="Text" id="guardianphone" name="guardianphone" value={this.state.guardianData.guardianphone} placeholder="Phone number" /><br/>
-                                    <button id="btnSubmit" className="blue" type="submit">Update</button>
+                                    <button id="btnSubmit" className="blue" type="submit">Update Guardian's Info</button>
                                 </form>
                             </div>
                         </div>

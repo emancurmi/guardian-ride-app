@@ -173,9 +173,9 @@ export default class SignedIn extends Component {
     }
 
     renderDrinkButton = () => {
-        let consumtion = this.calculateconsumtion();
-
-        if (consumtion <= 10) {
+        let consumption = this.calculateconsumtion();
+        console.log(consumption)
+        if (consumption <= 10) {
             return <AddDrinkBtn drinkid={this.state.selecteddrink} />
         }
         else {
