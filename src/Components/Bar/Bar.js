@@ -1,29 +1,29 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
-
+import { Link } from 'react-router-dom';
+import config from '../../config';
 import Drink from '../Drink/Drink';
+import { v4 as uuidv4 } from 'uuid';
 import './Bar.css';
 
 export default class Bar extends Component {
+
     constructor(props) {
         super(props)
 
         this.state = {
-            dataDrinkUserIds: this.props.dataDrinkUserIds,
-            drinkData: []
+            drinkData: [],
+            config: config
         }
     }
 
     setDrinkData = data => {
         this.setState({
-            drinkData: data
+            drinkData: [...this.state.drinkData, data]
         })
     }
 
     fetchDrinkData = () => {
-        this.state.dataDrinkUserIds.map(drink => {
-
-            //console.log(drink);
+        this.props.dataDrinkUserIds.map(drink => {
             fetch(this.state.config.API_ENDPOINT + 'drink/' + drink.drinkid, {
                 method: 'GET',
                 headers: {
@@ -39,7 +39,6 @@ export default class Bar extends Component {
                 })
 
                 .then(data => {
-                    console.log(data);
                     this.setDrinkData(data);
 
                 })
@@ -54,33 +53,44 @@ export default class Bar extends Component {
 
     componentDidMount() {
         this.fetchDrinkData();
-        console.log(this.state.dataDrinkUserIds);
     }
 
     render() {
         
         let barcontent;
 
-        if (this.state.drinkData.length !== 0) {
+        if (!this.props.dataDrinkUserIds) {
+            return null;
+        }
+        let uniq = [];
+        if (this.state.drinkData.length === this.props.dataDrinkUserIds.length) {
             barcontent = <div className="column content">
 
                 <div className="row center">
                     <h1 className="col-1">Drink List</h1>
                     <h4 className="col-1">Select Drink</h4>
+                    <p><Link to='/addfavdrink'>Click here to add new your favourite drink.</Link></p>
                 </div>
                 <div className="row spacebetween">
-                        {this.state.drinkData.map(drink => {
+                    {this.state.drinkData.map(drink => {
+                        if (uniq.indexOf(drink.drinkid) === -1) {
+                            uniq.push(drink.drinkid)
                             return (
                                 <Drink
-                                    key={drink.drinkid}
+                                    selected={this.props.selectedDrinks}
+                                    key={uuidv4()}
                                     id={drink.drinkid}
                                     name={drink.drinkname}
                                     value={drink.drinkalcoholvalue}
-                                //handleSlideClick={this.handleSlideClick}
+                                    onChange={this.props.toggleCheckbox}
                                 />
                             )
-                        })}
+                        }
+                    })}
+                    
                 </div>
+                <div className="row center">
+                    </div>
             </div>
         }
         else {

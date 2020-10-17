@@ -31,7 +31,7 @@ export default class AddDrinkBtn extends Component {
         const drinkuserlink = {
             drinkid: this.state.drinkid,
             userid: this.state.userid,
-            userdrinktime: moment().format('MM-DD-YY HH:mm:ss Z')//1602644590339
+            userdrinktime: moment().format('MM-DD-YY HH:mm:ssZ')//1602644590339
         }
 
         console.log(drinkuserlink);

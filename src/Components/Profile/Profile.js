@@ -92,9 +92,7 @@ export default class Profile extends Component {
             })
     }
 
-
     fetchguardian = () => {
-
         fetch(this.state.config.API_ENDPOINT + 'guardian/' + this.state.guardianid, {
             method: 'GET',
             headers: {
@@ -108,7 +106,7 @@ export default class Profile extends Component {
                 }
                 return res.json()
             })
-            .then(this.setGuardianData)
+            .then(this.setGuardianData())
             .catch(error => {
                 console.error(error)
                 this.setState({ error })
@@ -143,9 +141,7 @@ export default class Profile extends Component {
             })
 
             .then(data => {
-                userphone.value = '';
-                userpin.value = '';
-                this.setUser(data);
+                this.setUserData(data);
             })
 
             .catch(error => {
@@ -155,42 +151,98 @@ export default class Profile extends Component {
     }
 
     handleGuardianAngelSubmit = e => {
+        //fix here next guardian
 
         e.preventDefault();
 
-        const { userphone, userpin } = e.target;
+        const { guardianname, guardianphone } = e.target;
 
-        const user = {
-            userphone: userphone.value,
-            userpin: userpin.value
+        const guardian = {
+            guardianname: guardianname.value,
+            guardianphone: guardianphone.value
         }
 
         this.setState({ error: null })
 
-        fetch(this.state.config.API_ENDPOINT + 'user/?userphone=' + user.userphone + '&userpin=' + user.userpin, {
-            method: 'GET',
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${this.state.config.API_TOKEN}`
-            }
-        })
-            .then(res => {
-                if (!res.ok) {
-                    return res.json().then(error => Promise.reject(error))
+        //if new guardian
+        if (this.state.guardianid === "") {
+            //create new guardian
+            fetch(this.state.config.API_ENDPOINT + 'guardian/', {
+                method: 'POST',
+                body: JSON.stringify(guardian),
+                headers: {
+                    'content-type': 'application/json',
+                    'authorization': `bearer ${this.state.config.API_TOKEN}`
                 }
-                return res.json()
             })
 
-            .then(data => {
-                userphone.value = '';
-                userpin.value = '';
-                this.setUser(data);
+                .then(res => {
+                    if (!res.ok) {
+                        return res.json().then(error => Promise.reject(error));
+                    }
+                    return res.json();
+                })
+
+                .then(data => {
+                    this.setGuardianData(data)
+                    console.log(this.state.guardianData)
+                })
+
+                .catch(error => {
+                    console.error(error);
+                    this.setState({ error })
+                })
+            
+            //create new link
+            const user_guardian = {
+                guardianid: this.state.guardianData.guardianid,
+                userid: this.state.userData.userid
+            }
+
+            console.log(user_guardian);
+
+            fetch(this.state.config.API_ENDPOINT + 'user_guardian/', {
+                method: 'POST',
+                body: JSON.stringify(user_guardian),
+                headers: {
+                    'content-type': 'application/json',
+                    'authorization': `bearer ${this.state.config.API_TOKEN}`
+                }
             })
 
-            .catch(error => {
-                console.error(error)
-                this.setState({ error })
+                .then(res => {
+                    if (!res.ok) {
+                        return res.json().then(error => Promise.reject(error));
+                    }
+                    return res.json();
+                })
+                .catch(error => {
+                    console.error(error);
+                    this.setState({ error })
+                })
+
+        } //else if its an update
+        else{
+
+            fetch(this.state.config.API_ENDPOINT + `guardian/${this.state.guardianid}`, {
+                method: 'PATCH',
+                body: JSON.stringify(guardian),
+                headers: {
+                    'content-type': 'application/json',
+                    'authorization': `Bearer ${config.API_TOKEN}`
+                },
             })
+                .then(res => {
+                    if (!res.ok)
+                        return res.json().then(error => Promise.reject(error))
+                })
+                
+                .catch(error => {
+                    console.error(error)
+                    this.setState({ error })
+                })
+        }
+
     }
 
     componentDidMount() {

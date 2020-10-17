@@ -3,14 +3,14 @@
     "",
     "\\src",
     "\\src\\Components",
-    "\\src\\Components\\Loader",
+    "\\src\\Components\\CallGuardianBtn",
+    "\\src\\Components\\Drink",
     "\\src\\Components\\Login",
-    "\\src\\Components\\Nav",
-    "\\src\\Components\\Register",
+    "\\src\\Components\\Profile",
     "\\src\\Components\\SignedIn",
     "\\src\\Components\\SignOut",
     "\\src\\Components\\SignUp"
   ],
-  "SelectedNode": "\\src\\Winged-Circle---Small.jpg",
+  "SelectedNode": "\\src\\Components\\Bar\\Bar.js",
   "PreviewInSolutionExplorer": false
 }

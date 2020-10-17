@@ -22,45 +22,64 @@ export default class SignedIn extends Component {
             config: config,
             userid: engine.decrypt(read_cookie(config.cookie_key)),
             userData: {
-                userid: '',
+                userid: 0,
                 username: '',
                 userphone: '',
                 userpin: ''
             },
-            selecteddrink: -1,
+            selectedDrinks: 1,
             dataDrinkUserIds: [],
+            consumption: 0,
             error: null,
             isLoading: false
         }
     }
 
-    
-
+    //check if component loaded
     componentDidMount() {
         try {
+            this.calculateconsumtion();
             this.fetchuser();
             this.fetchfavouritedrinks();
-            console.log(this.state.dataDrinkUserIds);
         }
         catch (e) { console.log(e) }
     }
 
+    //update state seleted drink 
+    setselectedDrinks = data => {
+        this.setState({
+            selectedDrinks: data
+        })
+    }
+
+    //update userinformation in state
     setUserData = data => {
         this.setState({
             userData: data,
             error: null,
-            isLoading: false
+            isLoading: true
         })
     }
 
+    //update list of drinks in state
     setDataDrinkUserIds = data => {
         this.setState({
             dataDrinkUserIds: data,
             error: null,
-            isLoading: false
+            isLoading: true
         })
     }
 
+    //update consumption data in state
+    setCounsumption = consumption => {
+        this.setState({
+            consumption: consumption,
+            error: null,
+            isLoading: true
+        })
+    }
+
+    //fetch user api
     fetchuser = () => {
         fetch(this.state.config.API_ENDPOINT + 'user/' + this.state.userid, {
             method: 'GET',
@@ -85,8 +104,9 @@ export default class SignedIn extends Component {
             })
     }
 
+    //fetch favourite drinks from api
     fetchfavouritedrinks = () => {
-        fetch(this.state.config.API_ENDPOINT + 'user_drink/?userid=' + this.state.userData.userid, {
+        fetch(this.state.config.API_ENDPOINT + 'user_drink/?userid=' + this.state.userid, {
             method: 'GET',
             headers: {
                 'content-type': 'application/json',
@@ -101,9 +121,7 @@ export default class SignedIn extends Component {
             })
 
             .then(data => {
-                console.log(data);
                 this.setDataDrinkUserIds(data);
-                console.log(this.state.dataDrinkUserIds);
             })
 
             .catch(error => {
@@ -112,15 +130,14 @@ export default class SignedIn extends Component {
             })
     }
 
+    //calucate alcohol consumption 
     calculateconsumtion = () => {
-        let drinksid = [];
-        let start = moment().subtract({ 'hours': 4, 'minutes': 0 }).format('MM-DD-YY HH:mm:ss Z');
-        let end = moment().format('MM-DD-YY HH:mm:ss Z');
+        let start = moment().subtract({ 'hours': 4, 'minutes': 0 }).format('MM-DD-YY HH:mm:ssz');
+        let end = moment().format('MM-DD-YY HH:mm:ssz');
 
-        let consumtion = 0;
-        //fetch drinks by user in the last 4 hours.
+        let consumption = 0;
 
-        fetch(this.state.config.API_ENDPOINT + 'user_drink/?userid=' + this.state.userData.userid + '&start=' + start + '&end=' + end , {
+        fetch(this.state.config.API_ENDPOINT + 'user_drink/?userid=' + this.state.userid + '&start=' + start + '&end=' + end, {
             method: 'GET',
             headers: {
                 'content-type': 'application/json',
@@ -137,60 +154,71 @@ export default class SignedIn extends Component {
 
             //add drinkid from data to drinksid
             .then(data => {
-                this.drinksid = data.drinkid;
-            })
+                data.map(drink => {
+                    if (drink.drinkid > 0) {
+                        fetch(this.state.config.API_ENDPOINT + 'drink/' + drink.drinkid, {
+                            method: 'GET',
+                            headers: {
+                                'content-type': 'application/json',
+                                'Authorization': `Bearer ${this.state.config.API_TOKEN}`
+                            }
+                        })
 
+                            .then(res => {
+                                if (!res.ok) {
+                                    return res.json().then(error => Promise.reject(error))
+                                }
+                                return res.json()
+                            })
+                            //add dinking value
+                            .then(data => {
+                                consumption += data.drinkalcoholvalue
+                                this.setCounsumption(consumption);
+                            })
+
+                            .catch(error => {
+                                console.error(error)
+                                this.setState({ error })
+                            })
+                    }
+                    else {
+                        consumption += 3;
+                        this.setCounsumption(consumption);
+                    }
+                    
+                })
+            })
             .catch(error => {
                 console.error(error)
                 this.setState({ error })
             })
 
-        //foreach drink in dinkid
-        drinksid.forEach(user_drink => {
-
-            fetch(this.state.config.API_ENDPOINT + 'drink/' + user_drink.drinkid, {
-                method: 'GET',
-                headers: {
-                    'content-type': 'application/json',
-                    'Authorization': `Bearer ${this.state.config.API_TOKEN}`
-                }
-            })
-
-                .then(res => {
-                    if (!res.ok) {
-                        return res.json().then(error => Promise.reject(error))
-                    }
-                    return res.json()
-                })
-                //add dinking value
-                .then(data => {
-                    this.consumtion += data.drinkalcoholvalue
-                })
-
-        })
-
-        return consumtion;
+        
     }
 
+    //render button according to alcohol content
     renderDrinkButton = () => {
-        let consumption = this.calculateconsumtion();
-        console.log(consumption)
-        if (consumption <= 10) {
-            return <AddDrinkBtn drinkid={this.state.selecteddrink} />
+        if (this.state.consumption <= 10) {
+            return <AddDrinkBtn drinkid={this.state.selectedDrinks} />
         }
         else {
             return <CallGuardianBtn />
         }
     }
 
+    //handel toggle of drink radiobutton in bar
+    toggleCheckbox = e => {
+        let value = e.target.value;
+        this.setselectedDrinks(value);
+    }
+
     render() {
 
-        if (this.state.isLoading) {
+        if (!this.state.dataDrinkUserIds.length) {
             return (
                 <Loader loadingtype={"Favourite Drinks"} />
             );
         }
-
 
         return (
             <div className="column center">
@@ -199,9 +227,10 @@ export default class SignedIn extends Component {
                         <div className="col-1">
                             <h1>Welcome {this.state.userData.username}</h1>
                         </div>
+
                     </div>
                 </div>
-                <Bar dataDrinkUserIds={this.state.dataDrinkUserIds} />
+                <Bar dataDrinkUserIds={this.state.dataDrinkUserIds} selectedDrinks={this.state.selectedDrinks} toggleCheckbox={this.toggleCheckbox} />
                 {this.renderDrinkButton()}
             </div>
         )
