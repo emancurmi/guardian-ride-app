@@ -331,6 +331,7 @@ button, .blue {
     min-height:270px;
     background-size: 100%;
     background-image: url(./Images/slice-1-2.jpg);
+    background-repeat: round;
 }
 
 /*Tablet Version Codes*/
