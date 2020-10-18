@@ -48,11 +48,11 @@ export default class Register extends Component {
 
         e.preventDefault();
 
-        const { username, userphone } = e.target;
+        const { regusername, reguserphone } = e.target;
 
         const user = {
-            username: username.value,
-            userphone: userphone.value,
+            username: regusername.value,
+            userphone: reguserphone.value,
             userpin: Math.random().toString().substr(2, 4)
         }
 
@@ -75,8 +75,8 @@ export default class Register extends Component {
             })
 
             .then(data => {
-                username.value = '';
-                userphone.value = '';
+                regusername.value = '';
+                reguserphone.value = '';
                 this.addUser(data);
             })
 
@@ -92,9 +92,9 @@ export default class Register extends Component {
                 {this.renderRedirect()}
                 <h1>Register</h1>
                 <form onSubmit={this.handleSubmit} >
-                    <input type="Text" id="username" name="username" placeholder="Name" pattern="[A-Za-z]+" title="User name should be made up of Capital and small letters Only" required /><br />
-                    <input type="Text" id="userphone" name="userphone" placeholder="Phone number" title="Enter Phone Number" required /><br />
-                    <button id="btnSubmit" className="blue" type="submit">Register</button>
+                    <input type="Text" id="regusername" name="regusername" placeholder="Name" pattern="[A-Za-z]+" title="User name should be made up of Capital and small letters Only" required /><br />
+                    <input type="Text" id="reguserphone" name="reguserphone" placeholder="Phone number" title="Enter Phone Number" required /><br />
+                    <button id="btnRegisterSubmit" className="blue" type="submit">Register</button>
                 </form>
             </div>
         )

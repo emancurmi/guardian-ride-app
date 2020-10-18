@@ -327,6 +327,11 @@ button, .blue {
     border-color: rgb(0, 210, 212);
 }
 
+button, .blueonwhite {
+    color: rgb(0, 0, 0);
+    border-color: rgb(0, 210, 212);
+}
+
 .breaker {
     min-height:270px;
     background-size: 100%;

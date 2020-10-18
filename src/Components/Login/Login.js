@@ -72,15 +72,26 @@ export default class Login extends Component {
             })
 
             .then(data => {
-                userphone.value = '';
-                userpin.value = '';
-                this.setUser(data);
+                if (data != []) {
+                    userphone.value = '';
+                    userpin.value = '';
+                    this.setUser(data);
+                }
+                else {
+                    throw Error("User Not Found");
+                }
             })
 
             .catch(error => {
                 console.error(error)
                 this.setState({ error })
             })
+    }
+
+    showerror = () => {
+        if (this.state.error != null) {
+            return (<p>{this.state.error}</p>);
+        }
     }
 
     render() {
@@ -91,8 +102,9 @@ export default class Login extends Component {
                 <form onSubmit={this.handleSubmit} >
                     <input type="Text" id="userphone" name="userphone" placeholder="Phone number" title="Enter Phone Number" required /><br />
                     <input type="Password" id="userpin" name="userpin" placeholder="PIN number" title="Enter Pin Number" required /><br />
-                    <button id="btnSubmit" className="blue" type="submit">Sign In</button>
+                    <button id="btnLoginSubmit" className="blue" type="submit">Sign In</button>
                 </form>
+                {this.showerror()}
             </div>
         )
     }
