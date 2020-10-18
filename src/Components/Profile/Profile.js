@@ -14,8 +14,12 @@ export default class Profile extends Component {
             config: config,
             userid: engine.decrypt(read_cookie(config.cookie_key)),
             userData: [], 
-            guardianid: "",
-            guardianData:[],
+            guardianid: 0,
+            guardianData: {
+                guardianid: 0,
+                guardianname: "",
+                guardianphone: ""
+            },
             error: null,
             isLoading: true,
         }
@@ -26,7 +30,6 @@ export default class Profile extends Component {
             userData,
             error: null,
             isLoading: false
-
         })
     }
 
@@ -35,7 +38,6 @@ export default class Profile extends Component {
             guardianid,
             error: null,
             isLoading: false
-
         })
     }
 
@@ -44,7 +46,6 @@ export default class Profile extends Component {
             guardianData,
             error: null,
             isLoading: false
-
         })
     }
 
@@ -85,7 +86,10 @@ export default class Profile extends Component {
                 }
                 return res.json()
             })
-            .then(this.setGuardianId)
+            .then(data => {
+                this.setGuardianId(data.guardianid);
+                this.fetchguardian();
+            })
             .catch(error => {
                 console.error(error)
                 this.setState({ error })
@@ -93,24 +97,28 @@ export default class Profile extends Component {
     }
 
     fetchguardian = () => {
-        fetch(this.state.config.API_ENDPOINT + 'guardian/' + this.state.guardianid, {
-            method: 'GET',
-            headers: {
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${this.state.config.API_TOKEN}`
-            }
-        })
-            .then(res => {
-                if (!res.ok) {
-                    return res.json().then(error => Promise.reject(error))
+        if (this.state.guardianid !== 0) {
+            fetch(this.state.config.API_ENDPOINT + 'guardian/' + this.state.guardianid, {
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json',
+                    'Authorization': `Bearer ${this.state.config.API_TOKEN}`
                 }
-                return res.json()
             })
-            .then(this.setGuardianData())
-            .catch(error => {
-                console.error(error)
-                this.setState({ error })
-            })
+                .then(res => {
+                    if (!res.ok) {
+                        return res.json().then(error => Promise.reject(error))
+                    }
+                    return res.json()
+                })
+                .then(data => {
+                    this.setGuardianData(data)
+                })
+                .catch(error => {
+                    console.error(error)
+                    this.setState({ error })
+                })
+        }
     }
 
     handleUserUpdateSubmit = e => {
@@ -165,7 +173,7 @@ export default class Profile extends Component {
         this.setState({ error: null })
 
         //if new guardian
-        if (this.state.guardianid === "") {
+        if (this.state.guardianid === 0) {
             //create new guardian
             fetch(this.state.config.API_ENDPOINT + 'guardian/', {
                 method: 'POST',
@@ -185,42 +193,38 @@ export default class Profile extends Component {
 
                 .then(data => {
                     this.setGuardianData(data)
-                    console.log(this.state.guardianData)
-                })
 
-                .catch(error => {
-                    console.error(error);
-                    this.setState({ error })
-                })
-            
-            //create new link
-            const user_guardian = {
-                guardianid: this.state.guardianData.guardianid,
-                userid: this.state.userData.userid
-            }
-
-            console.log(user_guardian);
-
-            fetch(this.state.config.API_ENDPOINT + 'user_guardian/', {
-                method: 'POST',
-                body: JSON.stringify(user_guardian),
-                headers: {
-                    'content-type': 'application/json',
-                    'authorization': `bearer ${this.state.config.API_TOKEN}`
-                }
-            })
-
-                .then(res => {
-                    if (!res.ok) {
-                        return res.json().then(error => Promise.reject(error));
+                    const user_guardian = {
+                        guardianid: data.guardianid,
+                        userid: this.state.userid
                     }
-                    return res.json();
+
+                    fetch(this.state.config.API_ENDPOINT + 'user_guardian/', {
+                        method: 'POST',
+                        body: JSON.stringify(user_guardian),
+                        headers: {
+                            'content-type': 'application/json',
+                            'authorization': `bearer ${this.state.config.API_TOKEN}`
+                        }
+                    })
+
+                        .then(res => {
+                            if (!res.ok) {
+                                return res.json().then(error => Promise.reject(error));
+                            }
+                            return res.json();
+                        })
+                        .catch(error => {
+                            console.error(error);
+                            this.setState({ error })
+                        })
                 })
+
                 .catch(error => {
                     console.error(error);
                     this.setState({ error })
                 })
-
+         
         } //else if its an update
         else{
 
@@ -249,7 +253,6 @@ export default class Profile extends Component {
         try {
             this.fetchuser();
             this.fetchuserguardianlink();
-            this.fetchguardian();
         }
         catch (e) { console.log(e) }
     }
@@ -268,11 +271,11 @@ export default class Profile extends Component {
                                 <h5>User Information</h5>
                                 <form onSubmit={this.handleUserUpdateSubmit} >
                                     <label htmlFor="username">User Name: </label>
-                                    <input type="Text" id="username" name="username" value={this.state.userData.username} placeholder="UserName" /><br />
+                                    <input type="Text" id="username" name="username" defaultValue={this.state.userData.username || ''} placeholder="UserName" /><br />
                                     <label htmlFor="userphone">Phone Number: </label>
-                                    <input type="Text" id="userphone" name="userphone" value={this.state.userData.userphone} placeholder="Phone number" /><br />
+                                    <input type="Text" id="userphone" name="userphone" defaultValue={this.state.userData.userphone || ''} placeholder="Phone number" /><br />
                                     <label htmlFor="userpin">Your Pin: </label>
-                                    <input type="Text" id="userpin" name="userpin" value={this.state.userData.userpin} placeholder="PIN number" /><br />
+                                    <input type="Text" id="userpin" name="userpin" defaultValue={this.state.userData.userpin || ''} placeholder="PIN number" /><br />
                                     <button id="btnSubmit" className="blue" type="submit">Update User Info</button>
                                 </form>
                             </div>
@@ -283,9 +286,9 @@ export default class Profile extends Component {
                                 <h5>Guardian's Information</h5>
                                 <form onSubmit={this.handleGuardianAngelSubmit} >
                                     <label htmlFor="guardianname">Guardian Name: </label>
-                                    <input type="Text" id="guardianname" name="guardianname" value={this.state.guardianData.guardianname} placeholder="Guardian Name" /><br/>
+                                    <input type="Text" id="guardianname" name="guardianname" defaultValue={this.state.guardianData.guardianname || ''} placeholder="Guardian Name"/><br/>
                                     <label htmlFor="guardianphone">Guardian Number: </label>
-                                    <input type="Text" id="guardianphone" name="guardianphone" value={this.state.guardianData.guardianphone} placeholder="Phone number" /><br/>
+                                    <input type="Text" id="guardianphone" name="guardianphone" defaultValue={this.state.guardianData.guardianphone || ''} placeholder="Phone number" /><br/>
                                     <button id="btnSubmit" className="blue" type="submit">Update Guardian's Info</button>
                                 </form>
                             </div>

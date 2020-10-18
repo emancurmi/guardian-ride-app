@@ -3,7 +3,7 @@ import './CallGuardianBtn.css';
 import config from '../../config';
 import engine from '../../engine';
 import { read_cookie } from 'sfcookies';
-import moment from 'moment';
+//import moment from 'moment';
 
 export default class CallGuardianBtn extends Component {
 

@@ -170,7 +170,7 @@ export default class SignedIn extends Component {
                                 }
                                 return res.json()
                             })
-                            //add dinking value
+
                             .then(data => {
                                 consumption += data.drinkalcoholvalue
                                 this.setCounsumption(consumption);

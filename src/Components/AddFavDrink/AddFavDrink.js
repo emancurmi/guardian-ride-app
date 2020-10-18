@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+//import { withRouter } from 'react-router-dom';
 import './AddFavDrink.css';
 import { read_cookie } from 'sfcookies';
 import config from '../../config';
@@ -133,8 +133,6 @@ export default class AddFavDrink extends Component {
                 userdrinktime: "0000000000000" //1602644590339
             }
 
-            console.log(drinkuserlink);
-
             fetch(this.state.config.API_ENDPOINT + 'user_drink/', {
                 method: 'POST',
                 body: JSON.stringify(drinkuserlink),
@@ -206,10 +204,6 @@ export default class AddFavDrink extends Component {
                     console.error(error);
                     this.setState({ error })
                 })
-
-            console.log(this.state.drinkData + "added to database");
-
-
 
             this.setState({ error: null })
         }

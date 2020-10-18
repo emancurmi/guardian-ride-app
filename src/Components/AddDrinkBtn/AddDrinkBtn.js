@@ -34,8 +34,6 @@ export default class AddDrinkBtn extends Component {
             userdrinktime: moment().format('MM-DD-YY HH:mm:ssZ')//1602644590339
         }
 
-        console.log(drinkuserlink);
-
         fetch(this.state.config.API_ENDPOINT + 'user_drink/', {
             method: 'POST',
             body: JSON.stringify(drinkuserlink),
