@@ -73,7 +73,7 @@ export default class Login extends Component {
 
             .then(data => {
                 console.log(data.length);
-                if (data.length != 0) {
+                if (data.length !== 0) {
                     userphone.value = '';
                     userpin.value = '';
                     this.setUser(data);
