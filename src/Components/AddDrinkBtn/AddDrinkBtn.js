@@ -51,6 +51,7 @@ export default class AddDrinkBtn extends Component {
             })
 
             .then(data => {
+                this.props.calculateconsumtion();
                 console.log(data);
             })
 

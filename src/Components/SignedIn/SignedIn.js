@@ -82,6 +82,7 @@ export default class SignedIn extends Component {
             isLoading: data
         })
     }
+
     //fetch user api
     fetchuser = () => {
         fetch(this.state.config.API_ENDPOINT + 'user/' + this.state.userid, {
@@ -203,7 +204,7 @@ export default class SignedIn extends Component {
     //render button according to alcohol content
     renderDrinkButton = () => {
         if (this.state.consumption <= 10) {
-            return <AddDrinkBtn drinkid={this.state.selectedDrinks} />
+            return <AddDrinkBtn drinkid={this.state.selectedDrinks} calculateconsumtion={this.calculateconsumtion} />
         }
         else {
             return <CallGuardianBtn />

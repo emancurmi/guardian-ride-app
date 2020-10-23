@@ -27,6 +27,45 @@ export default class CallGuardianBtn extends Component {
         }
     }
 
+    setGuardianData = data => {
+        this.setState({
+            guardian: data,
+            error: null,
+            isLoading: false,
+        })
+    }
+
+    componentDidMount() {
+        try {
+            this.fetchguardian();
+        }
+        catch (e) { console.log(e) }
+    }
+
+    fetchguardian = () => {
+        fetch(this.state.config.API_ENDPOINT + 'user/?userid=' + this.state.userid, {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${this.state.config.API_TOKEN}`
+            }
+        })
+            .then(res => {
+                if (!res.ok) {
+                    return res.json().then(error => Promise.reject(error))
+                }
+                return res.json()
+            })
+            .then(data => {
+                this.setGuardianData(data);
+            })
+
+            .catch(error => {
+                console.error(error)
+                this.setState({ error })
+            })
+    }
+
 
     render() {
         return (
