@@ -31,8 +31,8 @@ export default class Login extends Component {
             userphone: user[0].userphone,
             error: null,
             isLoading: false,
-            redirect: true
         })
+        console.log(user);
         bake_cookie(config.cookie_key, engine.encrypt(this.state.userid.toString()));
         this.props.handleLogIn();
         this.renderRedirect();
@@ -72,13 +72,11 @@ export default class Login extends Component {
             })
 
             .then(data => {
-                if (data != []) {
+                console.log(data.length);
+                if (data.length = 0) {
                     userphone.value = '';
                     userpin.value = '';
                     this.setUser(data);
-                }
-                else {
-                    throw Error("User Not Found");
                 }
             })
 

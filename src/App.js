@@ -49,13 +49,16 @@ class App extends Component {
                     <Route path="/signout" exact render={(routeProps) => {
                         return <SignOut handleLogOut={this.handleLogOut} {...routeProps} />
                     }} />
-
+                    
                     <Route path="/profile" component={Profile} exact />
                 </div>
                 <Footer />
             </BrowserRouter>
+
         );
     }
+
+    
 }
 
 export default App;

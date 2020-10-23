@@ -31,7 +31,7 @@ export default class SignedIn extends Component {
             dataDrinkUserIds: [],
             consumption: 0,
             error: null,
-            isLoading: false
+            isLoading: true
         }
     }
 
@@ -57,7 +57,7 @@ export default class SignedIn extends Component {
         this.setState({
             userData: data,
             error: null,
-            isLoading: true
+            isLoading: false
         })
     }
 
@@ -66,7 +66,7 @@ export default class SignedIn extends Component {
         this.setState({
             dataDrinkUserIds: data,
             error: null,
-            isLoading: true
+            isLoading: false
         })
     }
 
@@ -75,7 +75,7 @@ export default class SignedIn extends Component {
         this.setState({
             consumption: consumption,
             error: null,
-            isLoading: true
+            isLoading: false
         })
     }
 
@@ -214,7 +214,8 @@ export default class SignedIn extends Component {
 
     render() {
 
-        if (!this.state.dataDrinkUserIds.length) {
+        //if (this.state.dataDrinkUserIds.length) {
+        if (this.state.isLoading) {
             return (
                 <Loader loadingtype={"Favourite Drinks"} />
             );

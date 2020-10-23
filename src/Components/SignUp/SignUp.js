@@ -26,7 +26,7 @@ export default class SignUp extends Component {
                             <Login handleLogIn={this.props.handleLogIn}/>
                         </div>
                         <div className="col-2">
-                                <Register />
+                            <Register handleLogIn={this.props.handleLogIn}/>
                         </div>
                     </div>
                 </div>
