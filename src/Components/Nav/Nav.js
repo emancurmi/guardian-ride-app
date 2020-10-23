@@ -10,22 +10,19 @@ export default class Nav extends Component {
             
             <nav>
                 <div className="menu-icon">
-                    <i className="fa fa-bars fa-2x"></i>
+                    <Link to="/"><img src="logo.png" alt="logo" height="50px" /></Link>
+                    {(read_cookie(config.cookie_key).length !== 0) ? <Link to="/SignedIn"><i class="fa fa-tachometer" aria-hidden="true"></i></Link> : ""}
+                    {(read_cookie(config.cookie_key).length !== 0) ? <Link to="/Profile"><i class="fa fa-user" aria-hidden="true"></i></Link> : ""}
+                    {(read_cookie(config.cookie_key).length !== 0) ? <Link to="/SignOut" ><i class="fa fa-sign-out" aria-hidden="true"></i></Link> : <Link to="/SignUp"><i class="fa fa-sign-in" aria-hidden="true"></i></Link>}
                 </div>
                 <div className="logo">
-                    <Link to="/"><img src="logo.png" alt="logo" height="50px" />Guardian Ride</Link>
+                    <Link to="/"><img src="logo.png" alt="logo" height="50px" /></Link>
                </div>
                 <div className="menu">
                     <ul>
-                        {
-                        //<li><a href="/">Home</a></li>
-                        //<li><a href="/">About</a></li>
-                        //<li><a href="/">Blog</a></li>
-                        //<li><a href="/">Contact</a></li>
-                        }
-                        {(read_cookie(config.cookie_key).length !== 0) ? <li><Link to="/SignedIn">Dashboard</Link></li> : ""}
-                        {(read_cookie(config.cookie_key).length !== 0) ? <li><Link to="/Profile">Profile</Link></li> : ""}
-                        {(read_cookie(config.cookie_key).length !== 0) ? <li><Link to="/SignOut" >Log Out</Link></li> : <li><Link to="/SignUp">Log In</Link></li>}
+                        {(read_cookie(config.cookie_key).length !== 0) ? <li><Link to="/SignedIn"><i class="fa fa-tachometer" aria-hidden="true"></i>Dashboard</Link></li> : ""}
+                        {(read_cookie(config.cookie_key).length !== 0) ? <li><Link to="/Profile"><i class="fa fa-user" aria-hidden="true"></i>Profile</Link></li> : ""}
+                        {(read_cookie(config.cookie_key).length !== 0) ? <li><Link to="/SignOut" ><i class="fa fa-sign-out" aria-hidden="true"></i>Log Out</Link></li> : <li><Link to="/SignUp"><i class="fa fa-sign-in" aria-hidden="true"></i>Log In</Link></li>}
                     </ul>
                 </div>
             </nav>

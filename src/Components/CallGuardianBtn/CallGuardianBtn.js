@@ -3,6 +3,7 @@ import './CallGuardianBtn.css';
 import config from '../../config';
 import engine from '../../engine';
 import { read_cookie } from 'sfcookies';
+import Loader from '../Loader/Loader';
 //import moment from 'moment';
 
 export default class CallGuardianBtn extends Component {
@@ -18,32 +19,43 @@ export default class CallGuardianBtn extends Component {
         this.state = {
             config: config,
             userid: engine.decrypt(read_cookie(config.cookie_key)),
-            guardian: {
-                guardianname: '',
-                guardianphoneno: '',
+            guardianid: 0,
+            guardianData: {
+                guardianid: 0,
+                guardianname: "",
+                guardianphone: ""
             },
             error: null,
             isLoading: true,
         }
     }
 
-    setGuardianData = data => {
+    //Update isLoading data in state
+    setIsLoading = data => {
         this.setState({
-            guardian: data,
-            error: null,
-            isLoading: false,
+            isLoading: data
         })
     }
 
-    componentDidMount() {
-        try {
-            this.fetchguardian();
-        }
-        catch (e) { console.log(e) }
+    setGuardianId = guardianid => {
+        this.setState({
+            guardianid,
+            error: null,
+            isLoading: false
+        })
     }
 
-    fetchguardian = () => {
-        fetch(this.state.config.API_ENDPOINT + 'user/?userid=' + this.state.userid, {
+    setGuardianData = guardianData => {
+        this.setState({
+            guardianData,
+            error: null,
+            isLoading: false
+        })
+    }
+
+    fetchuserguardianlink = () => {
+
+        fetch(this.state.config.API_ENDPOINT + 'user_guardian/?userid=' + this.state.userid, {
             method: 'GET',
             headers: {
                 'content-type': 'application/json',
@@ -57,25 +69,66 @@ export default class CallGuardianBtn extends Component {
                 return res.json()
             })
             .then(data => {
-                this.setGuardianData(data);
+                this.setGuardianId(data.guardianid);
+                this.fetchguardian();
             })
-
             .catch(error => {
                 console.error(error)
                 this.setState({ error })
             })
     }
 
+    fetchguardian = () => {
+        if (this.state.guardianid !== 0) {
+            fetch(this.state.config.API_ENDPOINT + 'guardian/' + this.state.guardianid, {
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json',
+                    'Authorization': `Bearer ${this.state.config.API_TOKEN}`
+                }
+            })
+                .then(res => {
+                    if (!res.ok) {
+                        return res.json().then(error => Promise.reject(error))
+                    }
+                    return res.json()
+                })
+                .then(data => {
+                    this.setGuardianData(data)
+                })
+                .catch(error => {
+                    console.error(error)
+                    this.setState({ error })
+                })
+        }
+    }
+
+
+    componentDidMount() {
+        try {
+            this.fetchuserguardianlink();
+            this.setIsLoading(false);
+        }
+        catch (e) { console.log(e) }
+    }
 
     render() {
-        return (
-            <div className="light">
-                <div className="column content">
-                    <div className="row center">
-                        <a href={"tel:" + this.guardianphoneno} className="bigredbutton" type="submit">Call Guardian</a>
+
+        if (this.state.isLoading) {
+            return (
+                <Loader loadingtype={"Loading Btn Info"} />
+            );
+        }
+        else {
+            return (
+                <div className="light">
+                    <div className="column content">
+                        <div className="row center">
+                            <a href={"tel:" + this.state.guardianData.guardianphone} className="bigredbutton" type="submit">Call Guardian</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        )
+            )
+        }
     }
 }

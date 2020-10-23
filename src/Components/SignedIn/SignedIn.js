@@ -225,20 +225,21 @@ export default class SignedIn extends Component {
                 <Loader loadingtype={"Favourite Drinks"} />
             );
         }
+        else {
+            return (
+                <div className="column center">
+                    <div className="linear-dark">
+                        <div className="row center">
+                            <div className="col-1">
+                                <h1>Welcome {this.state.userData.username}</h1>
+                            </div>
 
-        return (
-            <div className="column center">
-                <div className="linear-dark">
-                    <div className="row center">
-                        <div className="col-1">
-                            <h1>Welcome {this.state.userData.username}</h1>
                         </div>
-
                     </div>
+                    <Bar dataDrinkUserIds={this.state.dataDrinkUserIds} selectedDrinks={this.state.selectedDrinks} toggleCheckbox={this.toggleCheckbox} />
+                    {this.renderDrinkButton()}
                 </div>
-                <Bar dataDrinkUserIds={this.state.dataDrinkUserIds} selectedDrinks={this.state.selectedDrinks} toggleCheckbox={this.toggleCheckbox} />
-                {this.renderDrinkButton()}
-            </div>
-        )
+            )
+        }
     }
 }	

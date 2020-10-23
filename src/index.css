@@ -333,7 +333,6 @@ button, .blueonwhite {
 }
 
 .breaker {
-    min-height:270px;
     background-size: 100%;
     background-image: url(./Images/slice-1-2.jpg);
     background-repeat: round;
@@ -363,6 +362,13 @@ button, .blueonwhite {
 
     .col-6 {
         width: 33.33%;
+    }
+
+    .breaker {
+        min-height: 270px;
+        background-size: 100%;
+        background-image: url(./Images/slice-1-2.jpg);
+        background-repeat: round;
     }
 }
 
@@ -427,5 +433,12 @@ button, .blueonwhite {
         font-size: 21px;
         font-weight: 200;
         z-index: 999999;
+    }
+
+    .breaker {
+        min-height: 270px;
+        background-size: 100%;
+        background-image: url(./Images/slice-1-2.jpg);
+        background-repeat: round;
     }
 }
