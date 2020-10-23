@@ -194,6 +194,7 @@ export default class AddFavDrink extends Component {
                 })
 
                 .then(data => {
+                    console.log(data);
                     drinkname.value = '';
                     drinkalcoholvalue.value = '';
                     this.addDrink(data);

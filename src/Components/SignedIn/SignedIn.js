@@ -57,7 +57,6 @@ export default class SignedIn extends Component {
         this.setState({
             userData: data,
             error: null,
-            isLoading: false
         })
     }
 
@@ -66,7 +65,6 @@ export default class SignedIn extends Component {
         this.setState({
             dataDrinkUserIds: data,
             error: null,
-            isLoading: false
         })
     }
 
@@ -75,10 +73,15 @@ export default class SignedIn extends Component {
         this.setState({
             consumption: consumption,
             error: null,
-            isLoading: false
         })
     }
 
+    //Update isLoading data in state
+    setIsLoading = data => {
+        this.setState({
+            isLoading: data
+        })
+    }
     //fetch user api
     fetchuser = () => {
         fetch(this.state.config.API_ENDPOINT + 'user/' + this.state.userid, {
@@ -122,6 +125,7 @@ export default class SignedIn extends Component {
 
             .then(data => {
                 this.setDataDrinkUserIds(data);
+                this.setIsLoading(false);
             })
 
             .catch(error => {
