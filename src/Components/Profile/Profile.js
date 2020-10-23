@@ -28,7 +28,7 @@ export default class Profile extends Component {
         }
     }
 
-    togglePopup() {
+    togglePopup = () => {
         this.setState({
             showPopup: !this.state.showPopup
         });

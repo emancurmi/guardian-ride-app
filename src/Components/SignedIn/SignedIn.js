@@ -8,6 +8,7 @@ import AddDrinkBtn from '../AddDrinkBtn/AddDrinkBtn';
 import CallGuardianBtn from '../CallGuardianBtn/CallGuardianBtn';
 import Loader from '../Loader/Loader';
 import { read_cookie } from 'sfcookies';
+import Popup from '../Popup/Popup';
 
 export default class SignedIn extends Component {
 
@@ -31,8 +32,15 @@ export default class SignedIn extends Component {
             dataDrinkUserIds: [],
             consumption: 0,
             error: null,
-            isLoading: true
+            isLoading: true,
+            showPopup: false
         }
+    }
+
+    togglePopup() {
+        this.setState({
+            showPopup: !this.state.showPopup
+        });
     }
 
     //check if component loaded
@@ -41,6 +49,7 @@ export default class SignedIn extends Component {
             this.calculateconsumtion();
             this.fetchuser();
             this.fetchfavouritedrinks();
+            if (this.props.showPopup === true) { this.togglePopup.bind(this) }
         }
         catch (e) { console.log(e) }
     }
@@ -238,6 +247,15 @@ export default class SignedIn extends Component {
                     </div>
                     <Bar dataDrinkUserIds={this.state.dataDrinkUserIds} selectedDrinks={this.state.selectedDrinks} toggleCheckbox={this.toggleCheckbox} />
                     {this.renderDrinkButton()}
+
+                    {this.state.showPopup ?
+                        <Popup
+                            text='Welcome to Guardian App. Please update Profile Information'
+                            closePopup={this.togglePopup.bind(this)}
+                        />
+                        : null
+                    }
+
                 </div>
             )
         }
