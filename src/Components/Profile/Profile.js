@@ -310,11 +310,11 @@ export default class Profile extends Component {
                                     <h5>User Information</h5>
                                     <form onSubmit={this.handleUserUpdateSubmit} >
                                         <label htmlFor="username">User Name: </label>
-                                        <input type="Text" id="username" name="username" defaultValue={this.state.userData.username || ''} placeholder="UserName" /><br />
+                                        <input type="Text" id="username" name="username" defaultValue={this.state.userData.username || ''} placeholder="UserName" required /><br />
                                         <label htmlFor="userphone">Phone Number: </label>
-                                        <input type="Text" id="userphone" name="userphone" defaultValue={this.state.userData.userphone || ''} placeholder="Phone number" /><br />
+                                        <input type="Text" id="userphone" name="userphone" defaultValue={this.state.userData.userphone || ''} placeholder="Phone number" required /><br />
                                         <label htmlFor="userpin">Your Pin: </label>
-                                        <input type="Text" id="userpin" name="userpin" defaultValue={this.state.userData.userpin || ''} placeholder="PIN number" /><br />
+                                        <input type="Text" id="userpin" name="userpin" defaultValue={this.state.userData.userpin || ''} placeholder="PIN number" required /><br />
                                         <button id="btnSubmit" className="blueonwhite" type="submit">Update User Info</button>
                                     </form>
                                 </div>
@@ -325,9 +325,9 @@ export default class Profile extends Component {
                                     <h5>Guardian's Information</h5>
                                     <form onSubmit={this.handleGuardianAngelSubmit} >
                                         <label htmlFor="guardianname">Guardian Name: </label>
-                                        <input type="Text" id="guardianname" name="guardianname" defaultValue={this.state.guardianData.guardianname || ''} placeholder="Guardian Name" /><br />
+                                        <input type="Text" id="guardianname" name="guardianname" defaultValue={this.state.guardianData.guardianname || ''} placeholder="Guardian Name" required /><br />
                                         <label htmlFor="guardianphone">Guardian Number: </label>
-                                        <input type="Text" id="guardianphone" name="guardianphone" defaultValue={this.state.guardianData.guardianphone || ''} placeholder="Phone number" /><br />
+                                        <input type="Text" id="guardianphone" name="guardianphone" defaultValue={this.state.guardianData.guardianphone || ''} placeholder="Phone number" required /><br />
                                         <button id="btnSubmit" className="blueonwhite" type="submit">Update Guardian's Info</button>
                                     </form>
                                 </div>

@@ -12,10 +12,6 @@ export default class CallGuardianBtn extends Component {
 
 
         super(props);
-        if (read_cookie(config.cookie_key).length === 0) {
-            props.history.push('/signup');
-        }
-
         this.state = {
             config: config,
             userid: engine.decrypt(read_cookie(config.cookie_key)),

@@ -11,9 +11,6 @@ export default class AddFavDrink extends Component {
     constructor(props) {
 
         super(props);
-        if (read_cookie(config.cookie_key).length === 0) {
-            props.history.push('/signup');
-        }
 
         this.state = {
             config: config,

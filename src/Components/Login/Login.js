@@ -9,7 +9,6 @@ export default class Login extends Component {
 
     constructor(props) {
 
-
         super(props);
 
         this.state = {
@@ -34,7 +33,7 @@ export default class Login extends Component {
         })
         console.log(user);
         bake_cookie(config.cookie_key, engine.encrypt(this.state.userid.toString()));
-        this.props.handleLogIn();
+        this.props.handleLogIn;
         this.renderRedirect();
     }
 

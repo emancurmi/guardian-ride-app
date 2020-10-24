@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import SignUp from './SignUp';
 
 it('renders without crashing', () => {
     const div = document.createElement('div');
+    const history = { push: jest.fn() };
 
     ReactDOM.render(
-        <App />, div
+        <SignUp />, div
     );
     ReactDOM.unmountComponentAtNode(div);
 });

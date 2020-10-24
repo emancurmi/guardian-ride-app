@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import AddFavDrink from './AddFavDrink';
 
 it('renders without crashing', () => {
     const div = document.createElement('div');
 
     ReactDOM.render(
-        <App />, div
+        <AddFavDrink />, div
     );
     ReactDOM.unmountComponentAtNode(div);
 });
