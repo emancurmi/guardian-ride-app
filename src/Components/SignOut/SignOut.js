@@ -6,7 +6,7 @@ import config from '../../config';
 export default class SignOut extends Component {
 
     componentDidMount() {
-        this.props.handleLogOut;
+        this.props.handleLogOut();
     }
 
     render() {

@@ -3,14 +3,14 @@
     "",
     "\\src",
     "\\src\\Components",
-    "\\src\\Components\\Footer",
-    "\\src\\Components\\Header",
-    "\\src\\Components\\Home",
-    "\\src\\Components\\Loader",
-    "\\src\\Components\\Nav",
-    "\\src\\Components\\Popup",
-    "\\src\\Components\\Register"
+    "\\src\\Components\\AddFavDrink",
+    "\\src\\Components\\Bar",
+    "\\src\\Components\\CallGuardianBtn",
+    "\\src\\Components\\Checkbox",
+    "\\src\\Components\\Drink",
+    "\\src\\Components\\Login",
+    "\\src\\Components\\Popup"
   ],
-  "SelectedNode": "\\src\\Components\\SignedIn\\SignedIn.js",
+  "SelectedNode": "\\src\\Components\\Checkbox\\Checkbox.js",
   "PreviewInSolutionExplorer": false
 }
