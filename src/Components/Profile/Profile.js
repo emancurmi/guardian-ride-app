@@ -155,7 +155,7 @@ export default class Profile extends Component {
 
         this.setState({ error: null })
 
-        fetch(this.state.config.API_ENDPOINT + 'user/' + this.state.userid , {
+        fetch(this.state.config.API_ENDPOINT + 'user/' + this.state.userid, {
             method: 'PATCH',
             body: JSON.stringify(user),
             headers: {
@@ -174,11 +174,16 @@ export default class Profile extends Component {
                 this.togglePopup.bind(this)
             )
 
+            .then(
+                this.setIsLoading(false)
+            )
+
             .catch(error => {
                 console.error(error)
                 this.setState({ error })
             })
-        this.setIsLoading(false);
+
+
     }
 
     handleGuardianAngelSubmit = e => {

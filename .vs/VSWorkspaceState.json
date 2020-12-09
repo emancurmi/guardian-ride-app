@@ -3,14 +3,14 @@
     "",
     "\\src",
     "\\src\\Components",
-    "\\src\\Components\\AddFavDrink",
-    "\\src\\Components\\Bar",
     "\\src\\Components\\CallGuardianBtn",
     "\\src\\Components\\Checkbox",
     "\\src\\Components\\Drink",
+    "\\src\\Components\\Home",
     "\\src\\Components\\Login",
-    "\\src\\Components\\Popup"
+    "\\src\\Components\\Popup",
+    "\\src\\Components\\Profile"
   ],
-  "SelectedNode": "\\src\\Components\\Checkbox\\Checkbox.js",
+  "SelectedNode": "\\src\\Components\\Profile\\Profile.js",
   "PreviewInSolutionExplorer": false
 }
