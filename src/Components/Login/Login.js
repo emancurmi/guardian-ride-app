@@ -77,6 +77,10 @@ export default class Login extends Component {
                     userpin.value = '';
                     this.setUser(data);
                 }
+                else {
+                    console.error("User not found!")
+                    this.setState({ error: "User not found!" });
+                }
             })
 
             .catch(error => {

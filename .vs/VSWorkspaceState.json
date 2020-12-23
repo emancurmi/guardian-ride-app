@@ -1,16 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\src",
-    "\\src\\Components",
-    "\\src\\Components\\CallGuardianBtn",
-    "\\src\\Components\\Checkbox",
-    "\\src\\Components\\Drink",
-    "\\src\\Components\\Home",
-    "\\src\\Components\\Login",
-    "\\src\\Components\\Popup",
-    "\\src\\Components\\Profile"
+    ""
   ],
-  "SelectedNode": "\\src\\Components\\Profile\\Profile.js",
+  "SelectedNode": "\\src",
   "PreviewInSolutionExplorer": false
 }

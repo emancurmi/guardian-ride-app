@@ -16,7 +16,7 @@ export default class Drink extends Component {
 
     render() {
         return (
-            <label className="col-5"><input type="radio" name="drink" value={this.state.id} onChange={this.state.onChange} checked={this.state.checked == this.state.id} /> {this.state.name} - {this.state.value} mg</label>
+            <label className="col-5"><input type="radio" name="drink" value={this.state.id} onChange={this.state.onChange} checked={this.state.checked === this.state.id} /> {this.state.name} - {this.state.value} mg</label>
         );
 
     }

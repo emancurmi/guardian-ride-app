@@ -56,6 +56,7 @@ export default class SignedIn extends Component {
 
     //update state seleted drink 
     setselectedDrinks = data => {
+        console.log("selected dring " + data);
         this.setState({
             selectedDrinks: data
         })

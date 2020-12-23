@@ -93,7 +93,7 @@ export default class AddFavDrink extends Component {
         else {
             this.state.selectedDrinks.push(drink);
         }
-
+        console.log(this.state.selectedDrinks);
     }
 
     createCheckbox = drink => (
@@ -214,7 +214,6 @@ export default class AddFavDrink extends Component {
 
         e.preventDefault();
 
-        
         for (const checkbox of this.state.selectedDrinks) {
             this.fetchdrinkbyname(checkbox)
         }
@@ -231,15 +230,15 @@ export default class AddFavDrink extends Component {
                             <form onSubmit={this.handleCreateDrinkSubmit} >
                                 <h3>1. Create New Drink</h3>
                                 <input type="Text" id="drinkname" name="drinkname" placeholder="Drink Name" pattern="[A-Za-z]+" title="Drink name should be made up of Capital and small letters Only" /><br />
-                                <input type="Text" id="drinkalcoholvalue" name="drinkalcoholvalue" placeholder="Drink Alcohol Volume" title="Enter Drink Alcohol Volume" /><br />
-                                <button id="btnSubmit" className="blue" type="submit">Register</button>
+                                <input type="Text" id="drinkalcoholvalue" name="drinkalcoholvalue" placeholder="Drink Alcohol Volume / Shot" title="Enter Drink Alcohol Volume" /><br />
+                                <button id="btnSubmit" className="blueonwhite" type="submit">Register</button>
                             </form>
                         </div>
                         <div className="col-2">
                             <form onSubmit={this.handelCreateLinkSubmit} >
                                 <h3>2. Select Drink</h3>
                                 {this.createCheckboxes()}
-                                <button id="btnSubmit" className="blue" type="submit">Register</button>
+                                <button id="btnSubmit" className="blueonwhite" type="submit">Register</button>
                             </form>
                         </div>
                     </div>

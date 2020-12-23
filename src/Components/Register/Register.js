@@ -92,7 +92,7 @@ export default class Register extends Component {
                 {this.renderRedirect()}
                 <h1>Register</h1>
                 <form onSubmit={this.handleSubmit} >
-                    <input type="Text" id="regusername" name="regusername" placeholder="Name" pattern="[A-Za-z]+" title="User name should be made up of Capital and small letters Only" required /><br />
+                    <input type="Text" id="regusername" name="regusername" placeholder="Name" pattern="[A-Za-z\s]+" title="User name should be made up of Capital and small letters Only" required /><br />
                     <input type="Text" id="reguserphone" name="reguserphone" placeholder="Phone number" title="Enter Phone Number" required /><br />
                     <button id="btnRegisterSubmit" className="blue" type="submit">Register</button>
                 </form>
