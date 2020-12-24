@@ -77,7 +77,7 @@ export default class Bar extends Component {
                             uniq.push(drink.drinkid)
                             return (
                                 <Drink
-                                    selected={this.props.selectedDrinks}
+                                    selectedDrinks={this.props.selectedDrinks}
                                     key={uuidv4()}
                                     id={drink.drinkid}
                                     name={drink.drinkname}

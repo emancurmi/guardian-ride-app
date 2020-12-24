@@ -46,6 +46,7 @@ export default class SignedIn extends Component {
     //check if component loaded
     componentDidMount() {
         try {
+            console.log(this.state.userid)
             this.calculateconsumtion();
             this.fetchuser();
             this.fetchfavouritedrinks();
@@ -56,7 +57,6 @@ export default class SignedIn extends Component {
 
     //update state seleted drink 
     setselectedDrinks = data => {
-        console.log("selected dring " + data);
         this.setState({
             selectedDrinks: data
         })
@@ -115,6 +115,7 @@ export default class SignedIn extends Component {
             .catch(error => {
                 console.error(error)
                 this.setState({ error })
+                this.props.history.push('/signout');
             })
     }
 
@@ -147,22 +148,25 @@ export default class SignedIn extends Component {
 
     //calucate alcohol consumption 
     calculateconsumtion = () => {
-        let start = moment().subtract({ 'hours': 4, 'minutes': 0 }).format('MM-DD-YY HH:mm:ssz');
-        let end = moment().format('MM-DD-YY HH:mm:ssz');
+        let start = moment().subtract({ 'hours': 4, 'minutes': 0 }).format('YYYY-MM-DD HH:mm:ss');
+        //let end = moment().format('YYYY-MM-DD HH:mm:ss')
 
         let consumption = 0;
 
-        fetch(this.state.config.API_ENDPOINT + 'user_drink/?userid=' + this.state.userid + '&start=' + start + '&end=' + end, {
+        fetch(this.state.config.API_ENDPOINT + 'user_drink/?userid=' + this.state.userid + '&start=' + start, {
             method: 'GET',
             headers: {
                 'content-type': 'application/json',
                 'Authorization': `Bearer ${this.state.config.API_TOKEN}`
             }
         })
-            
+
             .then(res => {
                 if (!res.ok) {
-                    return res.json().then(error => Promise.reject(error))
+                    return res.json()
+                        .then(error =>
+                            Promise.reject(error)
+                        )
                 }
                 return res.json()
             })
@@ -228,7 +232,6 @@ export default class SignedIn extends Component {
     }
 
     render() {
-
         //if (this.state.dataDrinkUserIds.length) {
         if (this.state.isLoading) {
             return (

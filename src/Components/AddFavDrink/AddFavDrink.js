@@ -121,44 +121,9 @@ export default class AddFavDrink extends Component {
             drinkData: [...this.state.drinkData, drink],
         })
     }
-
-    pushtodb = drink => {
-        
-            const drinkuserlink = {
-                drinkid: drink.drinkid,
-                userid: this.state.userid,
-                userdrinktime: "0000000000000" //1602644590339
-            }
-
-            fetch(this.state.config.API_ENDPOINT + 'user_drink/', {
-                method: 'POST',
-                body: JSON.stringify(drinkuserlink),
-                headers: {
-                    'content-type': 'application/json',
-                    'authorization': `bearer ${this.state.config.API_TOKEN}`
-                }
-            })
-
-                .then(res => {
-                    if (!res.ok) {
-                        return res.json().then(error => Promise.reject(error));
-                    }
-                    return res.json();
-                })
-
-                .then(data => {
-                    console.log(data);
-                })
-
-                .catch(error => {
-                    console.error(error);
-                    this.setState({ error })
-                })
-        }
     
-
+    //create new drink
     handleCreateDrinkSubmit = e => {
-
         e.preventDefault();
 
         ////----- Form Section Processing -----////
@@ -166,6 +131,7 @@ export default class AddFavDrink extends Component {
         const { drinkname, drinkalcoholvalue } = e.target;
 
         if (drinkname.value !== "" | drinkalcoholvalue.value !== "") {
+            console.log("entered if statement");
             //setup drink
             const drink = {
                 drinkname: drinkname.value,
@@ -210,15 +176,69 @@ export default class AddFavDrink extends Component {
         }
     }
 
+    //add drink to favourites
     handelCreateLinkSubmit = e => {
 
         e.preventDefault();
+     
+        for (const drinkname of this.state.selectedDrinks) {
+            //fetch drink info
+            fetch(this.state.config.API_ENDPOINT + 'drink/?drinkname=' + drinkname, {
+                method: 'GET',
+                headers: {
+                    'content-type': 'application/json',
+                    'Authorization': `Bearer ${this.state.config.API_TOKEN}`
+                }
+            })
+                .then(res => {
+                    if (!res.ok) {
+                        return res.json().then(error => Promise.reject(error))
+                    }
+                    return res.json()
+                })
+                .then(drink => {
 
-        for (const checkbox of this.state.selectedDrinks) {
-            this.fetchdrinkbyname(checkbox)
+                    //create link between drink and user
+                    const drinkuserlink = {
+                        drinkid: drink.drinkid,
+                        userid: this.state.userid,
+                        userdrinktime: '2012-12-31 00:00:00' //1602644590339
+                    }
+
+                    fetch(this.state.config.API_ENDPOINT + 'user_drink/', {
+                        method: 'POST',
+                        body: JSON.stringify(drinkuserlink),
+                        headers: {
+                            'content-type': 'application/json',
+                            'authorization': `bearer ${this.state.config.API_TOKEN}`
+                        }
+                    })
+
+                        .then(res => {
+                            if (!res.ok) {
+                                return res.json().then(error => Promise.reject(error));
+                            }
+                            return res.json();
+                        })
+
+                        .then(data => {
+                            console.log(data);
+                        })
+
+                        .catch(error => {
+                            console.error(error);
+                            this.setState({ error })
+                        })
+                })
+
+                .catch(error => {
+                    console.error(error)
+                    this.setState({ error })
+                })
+
         }
 
-        this.state.drinkuserslinkData.forEach(this.pushtodb)
+        //this.state.drinkuserslinkData.forEach(this.pushtodb)
     }
 
     render() {
@@ -231,14 +251,14 @@ export default class AddFavDrink extends Component {
                                 <h3>1. Create New Drink</h3>
                                 <input type="Text" id="drinkname" name="drinkname" placeholder="Drink Name" pattern="[A-Za-z]+" title="Drink name should be made up of Capital and small letters Only" /><br />
                                 <input type="Text" id="drinkalcoholvalue" name="drinkalcoholvalue" placeholder="Drink Alcohol Volume / Shot" title="Enter Drink Alcohol Volume" /><br />
-                                <button id="btnSubmit" className="blueonwhite" type="submit">Register</button>
+                                <button id="btnSubmit" className="blueonwhite" type="submit">Create New Drink</button>
                             </form>
                         </div>
                         <div className="col-2">
                             <form onSubmit={this.handelCreateLinkSubmit} >
                                 <h3>2. Select Drink</h3>
                                 {this.createCheckboxes()}
-                                <button id="btnSubmit" className="blueonwhite" type="submit">Register</button>
+                                <button id="btnSubmit" className="blueonwhite" type="submit">Save As Favourite</button>
                             </form>
                         </div>
                     </div>
