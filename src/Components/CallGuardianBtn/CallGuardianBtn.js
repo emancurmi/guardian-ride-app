@@ -21,6 +21,7 @@ export default class CallGuardianBtn extends Component {
                 guardianname: "",
                 guardianphone: ""
             },
+            btnMessage: "Guardian Not Setup!",
             error: null,
             isLoading: true,
         }
@@ -45,6 +46,7 @@ export default class CallGuardianBtn extends Component {
         this.setState({
             guardianData,
             error: null,
+            btnMessage:"Call Guardian",
             isLoading: false
         })
     }
@@ -91,12 +93,14 @@ export default class CallGuardianBtn extends Component {
                 })
                 .then(data => {
                     this.setGuardianData(data)
+                    
                 })
                 .catch(error => {
                     console.error(error)
                     this.setState({ error })
                 })
         }
+
     }
 
 
@@ -120,7 +124,7 @@ export default class CallGuardianBtn extends Component {
                 <div className="light">
                     <div className="column content">
                         <div className="row center">
-                            <a href={"tel:" + this.state.guardianData.guardianphone} className="bigredbutton" type="submit">Call Guardian</a>
+                            <a href={"tel:" + this.state.guardianData.guardianphone} className="bigredbutton" type="submit">{this.state.btnMessage}</a>
                         </div>
                     </div>
                 </div>
