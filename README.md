@@ -61,7 +61,7 @@ https://github.com/orpyxis-technologies/guardian-ride-app
 
 ### Built With
 
-* ReactJs
+* ReactJs * Node Js * PostgreSQL 
 
 
 
