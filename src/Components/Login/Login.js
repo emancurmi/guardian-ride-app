@@ -101,7 +101,7 @@ export default class Login extends Component {
                 {this.renderRedirect()}
                 <h1>Login</h1>
                 <form onSubmit={this.handleSubmit} >
-                    <input type="Text" id="userphone" name="userphone" placeholder="Phone number" title="Enter Phone Number" required /><br />
+                    <input type="number" id="userphone" name="userphone" placeholder="Phone number" title="Enter Phone Number" required /><br />
                     <input type="Password" id="userpin" name="userpin" placeholder="PIN number" title="Enter Pin Number" required /><br />
                     <button id="btnLoginSubmit" className="blue" type="submit">Sign In</button>
                 </form>
