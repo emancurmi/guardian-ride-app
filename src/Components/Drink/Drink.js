@@ -22,14 +22,14 @@ export default class Drink extends Component {
             return (
                 <label className="col-5">
                     <input type="radio" name="drink" value={this.state.id} onChange={this.state.onChange} checked  />
-                    {this.state.name} - {this.state.value} mg
+                    <strong>{this.state.name} - {this.state.value} mg</strong>
                 </label>)
         }
         else {
             return (
                 <label className="col-5">
                     <input type="radio" name="drink" value={this.state.id} onChange={this.state.onChange} />
-                    {this.state.name} - {this.state.value} mg
+                    <strong>{this.state.name} - {this.state.value} mg</strong>
                 </label>)
 
         }

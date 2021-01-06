@@ -14,17 +14,21 @@ export default class Footer extends Component {
                         <div className="column col-4 center">
                             <h6>News Letter Signup</h6>
                             <form>
-                                <input type="email" placeholder="E-mail" /><br />
+                                <label for="email">E-mail: </label>
+                                <input type="email" title="email" id="email" placeholder="E-mail" /><br />
                                 <button className="blue">Sign Up</button>
                             </form>
                         </div>
                         <div className="column col-4 center">
                             <h6>Contact Us</h6>
                             <form>
-                                <input type="text" placeholder="Name" /><br />
-                                <input type="email" placeholder="E-mail" /><br />
-                                <input type="text" placeholder="Comment" rows="5" /><br />
-                                <button className="blue">Submit</button>
+                                <label for="name">Name: </label>
+                                <input type="text" title="name" id="name" placeholder="Name" /><br />
+                                <label for="contactemail">E-mail: </label>
+                                <input type="email" title="contact_email" id="contactemail" placeholder="E-mail" /><br />
+                                <label for="comment">Comment: </label>
+                                <input type="text" title="comment" id="comment" placeholder="Comment" rows="5" /><br />
+                                <button className="blue" onClick="/">Submit</button>
                             </form>
                         </div>
                         <div className="column col-4">
@@ -36,10 +40,12 @@ export default class Footer extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="column col-1 center" >
-                        Designed & Developed by Eman Curmi &copy;
-                        Copyright 2020
+                <div className="dark">
+                    <div className="row">
+                        <div className="column col-1 center" >
+                            <p>Designed & Developed by Eman Curmi &copy;
+                        Copyright 2020</p>
+                        </div>
                     </div>
                 </div>
             </div>

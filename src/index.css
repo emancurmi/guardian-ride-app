@@ -108,19 +108,19 @@ p {
     }
 
     .white h4 {
-        color: #83909a;
+        color: #4B5258;
     }
 
     .white h5 {
-        color: #83909a;
+        color: #4B5258;
     }
 
     .white h6 {
-        color: #83909a;
+        color: #4B5258;
     }
 
     .white p {
-        color: #52535b;
+        color: #434851;
     }
 
 .light {
@@ -148,19 +148,19 @@ p {
     }
 
     .light h4 {
-        color: #83909a;
+        color: #4B5258;
     }
 
     .light h5 {
-        color: #83909a;
+        color: #4B5258;
     }
 
     .light h6 {
-        color: #83909a;
+        color: #4B5258;
     }
 
     .light p {
-        color: #52535b;
+        color: #434851;
     }
 
 
@@ -336,6 +336,29 @@ button, .blueonwhite {
     background-size: 100%;
     background-image: url(./Images/slice-1-2.jpg);
     background-repeat: round;
+}
+
+footer {
+    margin-top: 1rem;
+    background-color: rgb(235, 195, 64);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+    .footer label {
+        color: #83909a;
+        font-size: 1rem;
+    }
+
+.footer .column {
+    display: inline-block;
+}
+
+label {
+    color: #434851;
+    font-size: 1rem;
 }
 
 /*Tablet Version Codes*/

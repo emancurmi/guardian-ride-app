@@ -15,7 +15,7 @@ export default class Home extends Component {
                 <div className="linear-dark">
                     <div className="row center">
                         <div className="col-2">
-                            <img alt="logo" src="logo.png" style={{"width":"100%"}} />
+                            <img alt="Home Page Logo Image" src="logo.png" style={{"width":"100%"}} />
                         </div>
                         <div className="col-2">
                             <div className="column">
@@ -26,7 +26,7 @@ export default class Home extends Component {
                                         {
                                             //<button className="clear">About Us</button>
                                         }
-                                        <button className="blue" onClick={() => this.nextPath('/SignUp') }>Sign Up</button>
+                                        <button className="blue" alt="go to signup form" onClick={() => this.nextPath('/SignUp')}>Sign Up</button>
                                     </div>
                                 </div>
                             </div>

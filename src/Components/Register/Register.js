@@ -82,8 +82,14 @@ export default class Register extends Component {
 
             .catch(error => {
                 console.error(error);
-                this.setState({ error })
+                this.setState({ error: "Phone Number is Registered" });
             })
+    }
+
+    showerror = () => {
+        if (this.state.error != null) {
+            return (<p>{this.state.error}</p>);
+        }
     }
 
     render() {
@@ -96,6 +102,7 @@ export default class Register extends Component {
                     <input type="number" id="reguserphone" name="reguserphone" placeholder="Phone number" title="Enter Phone Number" required /><br />
                     <button id="btnRegisterSubmit" className="blue" type="submit">Register</button>
                 </form>
+                {this.showerror()}
             </div>
         )
     }
