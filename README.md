@@ -21,7 +21,7 @@ https://github.com/orpyxis-technologies/guardian-ride-app
     <a href="https://github.com/orpyxis-technologies/guardian-ride-app"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://guardian-ride-app.vercel.app/">View Demo</a>
+    <a href="https://guardian-ride-app.vercel.app/">View Demo - Use Username: 123456789 and Password: 0000 for testing purposes</a>
     ·
     <a href="https://github.com/orpyxis-technologies/guardian-ride-app/issues">Guardian Ride App Bug</a>
     ·
