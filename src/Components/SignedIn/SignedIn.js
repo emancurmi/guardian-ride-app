@@ -15,9 +15,6 @@ export default class SignedIn extends Component {
     constructor(props) {
 
         super(props);
-        if (read_cookie(config.cookie_key).length === 0) {
-            props.history.push('/signup');
-        }
 
         this.state = {
             config: config,
@@ -45,13 +42,19 @@ export default class SignedIn extends Component {
 
     //check if component loaded
     componentDidMount() {
+        if (read_cookie(config.cookie_key).length === 0) {
+            this.props.history.push('/signup');
+        }
+
         try {
             this.calculateconsumtion();
             this.fetchuser();
             this.fetchfavouritedrinks();
             if (this.props.showPopup === true) { this.togglePopup.bind(this) }
         }
-        catch (e) { console.log(e) }
+        catch (e) {
+            //console.log(e)
+        }
     }
 
     //update state seleted drink 
@@ -171,8 +174,7 @@ export default class SignedIn extends Component {
 
             //add drinkid from data to drinksid
             .then(data => {
-                data.map(drink => {
-                    console.log(drink)
+                data.forEach(drink => {
                     if (drink.drinkid > 0) {
                         fetch(this.state.config.API_ENDPOINT + 'drink/' + drink.drinkid, {
                             method: 'GET',

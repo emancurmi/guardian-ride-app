@@ -90,7 +90,9 @@ export default class AddFavDrink extends Component {
         try {
             this.fetchalldrinks();
         }
-        catch (e) { console.log(e) }
+        catch (e) {
+            //console.log(e)
+        }
     }
     
 
@@ -226,9 +228,9 @@ export default class AddFavDrink extends Component {
                             return res.json();
                         })
 
-                        .then(data => {
-                            console.log(data);
-                        })
+                        //.then(data => {
+                            //console.log(data);
+                        //})
 
                         .catch(error => {
                             console.error(error);

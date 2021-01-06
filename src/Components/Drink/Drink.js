@@ -15,9 +15,11 @@ export default class Drink extends Component {
     }
 
     render() {
-        if (this.state.id == this.state.selectedDrinks) {
+        let drinkid = parseInt(this.state.id);
+        let selecteddrinkid = parseInt(this.state.selectedDrinks);
+
+        if (drinkid === selecteddrinkid) {
             return (
-                
                 <label className="col-5">
                     <input type="radio" name="drink" value={this.state.id} onChange={this.state.onChange} checked  />
                     {this.state.name} - {this.state.value} mg

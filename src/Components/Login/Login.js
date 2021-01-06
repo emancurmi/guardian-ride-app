@@ -31,7 +31,7 @@ export default class Login extends Component {
             error: null,
             isLoading: false,
         })
-        console.log(user);
+        //console.log(user);
         bake_cookie(config.cookie_key, engine.encrypt(this.state.userid.toString()));
         this.props.handleLogIn();
         this.renderRedirect();
@@ -71,7 +71,7 @@ export default class Login extends Component {
             })
 
             .then(data => {
-                console.log(data.length);
+                //console.log(data.length);
                 if (data.length !== 0) {
                     userphone.value = '';
                     userpin.value = '';

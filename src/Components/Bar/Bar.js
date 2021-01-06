@@ -23,7 +23,8 @@ export default class Bar extends Component {
     }
 
     fetchDrinkData = () => {
-        this.props.dataDrinkUserIds.map(drink => {
+        
+        this.props.dataDrinkUserIds.forEach(drink => {
             fetch(this.state.config.API_ENDPOINT + 'drink/' + drink.drinkid, {
                 method: 'GET',
                 headers: {
@@ -33,22 +34,22 @@ export default class Bar extends Component {
             })
                 .then(res => {
                     if (!res.ok) {
-                        return res.json().then(error => Promise.reject(error))
+                        return res.json().then(error => Promise.reject(error));
                     }
-                    return res.json()
+                    return res.json();
                 })
 
                 .then(data => {
                     this.setDrinkData(data);
-
                 })
 
                 .catch(error => {
-                    console.error(error)
-                    this.setState({ error })
+                    console.error(error);
+                    this.setState({ error });
                 })
 
         })
+
     }
 
     componentDidMount() {
@@ -62,7 +63,17 @@ export default class Bar extends Component {
         if (!this.props.dataDrinkUserIds) {
             return null;
         }
-        let uniq = [];
+
+        //remove duplicates
+        const ret = Object.values(
+            this.state.drinkData.reduce((prev, c) => {
+                const p = prev;
+                const key = c.drinkid;
+                p[key] = c;
+                return p;
+            }, {})
+        );
+
         if (this.state.drinkData.length === this.props.dataDrinkUserIds.length) {
             barcontent = <div className="column content">
 
@@ -72,9 +83,7 @@ export default class Bar extends Component {
                     <p><Link to='/addfavdrink'>Click here to add new your favourite drink.</Link></p>
                 </div>
                 <div className="row spacebetween">
-                    {this.state.drinkData.map(drink => {
-                        if (uniq.indexOf(drink.drinkid) === -1) {
-                            uniq.push(drink.drinkid)
+                    {ret.map(drink => {
                             return (
                                 <Drink
                                     selectedDrinks={this.props.selectedDrinks}
@@ -86,8 +95,7 @@ export default class Bar extends Component {
                                 />
                             )
                         }
-                    })}
-                    
+                    )}
                 </div>
                 <div className="row center">
                     </div>

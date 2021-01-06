@@ -109,7 +109,9 @@ export default class CallGuardianBtn extends Component {
             this.fetchuserguardianlink();
             this.setIsLoading(false);
         }
-        catch (e) { console.log(e) }
+        catch (e) {
+            //console.log(e) 
+        }
     }
 
     render() {

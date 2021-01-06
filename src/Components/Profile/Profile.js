@@ -298,7 +298,9 @@ export default class Profile extends Component {
             this.fetchuser();
             this.fetchuserguardianlink();
         }
-        catch (e) { console.log(e) }
+        catch (e) {
+            //console.log(e)
+        }
     }
 
     render() {

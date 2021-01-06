@@ -56,12 +56,12 @@ export default class Home extends Component {
                 <div className="light">
                     <div className="column content">
                         <div className="row center">
-                        <h1 className="col-1">Idea</h1>
-                        <h4 className="col-1">Why Choosing Guardian Ride?</h4>
-                            </div>
-                            <div className="row">
-                        <p className="col-2">Guardian Ride is an app based on the requirement of the user knowing the driver in person or through a firend our drivers are not anyone of the street, our drivers are the ones you choose to pick you up.</p>
-                        <p className="col-2">As the app is still in its initial phases we still advise you to use responsibly and always check whos is the driving.</p>
+                            <h1 className="col-1">Idea</h1>
+                            <h4 className="col-1">Why Choosing Guardian Ride?</h4>
+                        </div>
+                        <div className="row">
+                            <p className="col-2">Guardian Ride is an app based on the requirement of the user knowing the driver in person or through a firend our drivers are not anyone of the street, our drivers are the ones you choose to pick you up.</p>
+                            <p className="col-2">As the app is still in its initial phases we still advise you to use responsibly and always check whos is the driving.</p>
                         </div>
                     </div>
                 </div>

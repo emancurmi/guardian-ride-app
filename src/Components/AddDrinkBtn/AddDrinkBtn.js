@@ -11,9 +11,6 @@ export default class AddDrinkBtn extends Component {
 
 
         super(props);
-        if (read_cookie(config.cookie_key).length === 0) {
-            props.history.push('/signup');
-        }
 
         this.state = {
             config: config,
@@ -52,7 +49,7 @@ export default class AddDrinkBtn extends Component {
 
             .then(data => {
                 this.props.calculateconsumtion();
-                console.log(data);
+                //console.log(data);
             })
 
             .catch(error => {
@@ -60,7 +57,6 @@ export default class AddDrinkBtn extends Component {
                 this.setState({ error })
             })
     }
-
 
     render() {
         return (
