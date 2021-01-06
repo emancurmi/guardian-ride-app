@@ -10,13 +10,13 @@ export default class Nav extends Component {
             
             <nav>
                 <div className="menu-icon">
-                    <Link to="/"><img src="logo.png" alt="Mobile Logo Image" height="50px" /></Link>
+                    <Link to="/"><img src="logo.png" alt="Mobile Logo" height="50px" /></Link>
                     {(read_cookie(config.cookie_key).length !== 0) ? <Link to="/SignedIn"><i className="fa fa-tachometer" aria-hidden="true"></i></Link> : ""}
                     {(read_cookie(config.cookie_key).length !== 0) ? <Link to="/Profile"><i className="fa fa-user" aria-hidden="true"></i></Link> : ""}
                     {(read_cookie(config.cookie_key).length !== 0) ? <Link to="/SignOut" ><i className="fa fa-sign-out" aria-hidden="true"></i></Link> : <Link to="/SignUp"><i className="fa fa-sign-in" aria-hidden="true"></i></Link>}
                 </div>
                 <div className="logo">
-                    <Link to="/"><img src="logo.png" alt="Desktop Logo Image" height="50px" /></Link>
+                    <Link to="/"><img src="logo.png" alt="Desktop Logo" height="50px" /></Link>
                </div>
                 <div className="menu">
                     <ul>

@@ -14,7 +14,7 @@ export default class Footer extends Component {
                         <div className="column col-4 center">
                             <h6>News Letter Signup</h6>
                             <form>
-                                <label for="email">E-mail: </label>
+                                <label htmlFor="email">E-mail: </label>
                                 <input type="email" title="email" id="email" placeholder="E-mail" /><br />
                                 <button className="blue">Sign Up</button>
                             </form>
@@ -22,13 +22,13 @@ export default class Footer extends Component {
                         <div className="column col-4 center">
                             <h6>Contact Us</h6>
                             <form>
-                                <label for="name">Name: </label>
+                                <label htmlFor="name">Name: </label>
                                 <input type="text" title="name" id="name" placeholder="Name" /><br />
-                                <label for="contactemail">E-mail: </label>
+                                <label htmlFor="contactemail">E-mail: </label>
                                 <input type="email" title="contact_email" id="contactemail" placeholder="E-mail" /><br />
-                                <label for="comment">Comment: </label>
+                                <label htmlFor="comment">Comment: </label>
                                 <input type="text" title="comment" id="comment" placeholder="Comment" rows="5" /><br />
-                                <button className="blue" onClick="/">Submit</button>
+                                <button className="blue">Submit</button>
                             </form>
                         </div>
                         <div className="column col-4">
