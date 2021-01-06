@@ -3,12 +3,11 @@
     "",
     "\\src",
     "\\src\\Components",
-    "\\src\\Components\\AddDrinkBtn",
-    "\\src\\Components\\AddFavDrink",
-    "\\src\\Components\\Bar",
+    "\\src\\Components\\CallGuardianBtn",
     "\\src\\Components\\SignedIn",
     "\\src\\Components\\SignOut",
     "\\src\\Components\\SignUp"
   ],
+  "SelectedNode": "\\src\\config.js",
   "PreviewInSolutionExplorer": false
 }

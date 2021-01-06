@@ -15,7 +15,11 @@ export default class Profile extends Component {
         this.state = {
             config: config,
             userid: engine.decrypt(read_cookie(config.cookie_key)),
-            userData: [], 
+            userData: {
+                username: "",
+                userphone: "",
+                userpin:""
+            }, 
             guardianid: 0,
             guardianData: {
                 guardianid: 0,
@@ -81,7 +85,9 @@ export default class Profile extends Component {
                 }
                 return res.json()
             })
-            .then(this.setUserData)
+            .then(data => {
+                this.setUserData(data)
+            })
             .catch(error => {
                 console.error(error)
                 this.setState({ error })
@@ -146,16 +152,17 @@ export default class Profile extends Component {
         this.setIsLoading(true)
         e.preventDefault();
 
-        const { userphone, userpin } = e.target;
-
+        const { username, userphone, userpin } = e.target;
+        
         const user = {
+            userid: this.state.userid,
+            username: username.value,
             userphone: userphone.value,
             userpin: userpin.value
         }
 
-        this.setState({ error: null })
-
-        fetch(this.state.config.API_ENDPOINT + 'user/' + this.state.userid, {
+        fetch(this.state.config.API_ENDPOINT + 'user/' + user.userid, {
+            
             method: 'PATCH',
             body: JSON.stringify(user),
             headers: {
@@ -317,9 +324,9 @@ export default class Profile extends Component {
                                         <label htmlFor="username">User Name: </label>
                                         <input type="Text" id="username" name="username" defaultValue={this.state.userData.username || ''} placeholder="UserName" required /><br />
                                         <label htmlFor="userphone">Phone Number: </label>
-                                        <input type="Text" id="userphone" name="userphone" defaultValue={this.state.userData.userphone || ''} placeholder="Phone number" required /><br />
+                                        <input type="number" id="userphone" name="userphone" defaultValue={this.state.userData.userphone || ''} placeholder="Phone number" required /><br />
                                         <label htmlFor="userpin">Your Pin: </label>
-                                        <input type="Text" id="userpin" name="userpin" defaultValue={this.state.userData.userpin || ''} placeholder="PIN number" required /><br />
+                                        <input type="number" id="userpin" name="userpin" defaultValue={this.state.userData.userpin || ''} placeholder="PIN number" required /><br />
                                         <button id="btnSubmit" className="blueonwhite" type="submit">Update User Info</button>
                                     </form>
                                 </div>
@@ -332,7 +339,7 @@ export default class Profile extends Component {
                                         <label htmlFor="guardianname">Guardian Name: </label>
                                         <input type="Text" id="guardianname" name="guardianname" defaultValue={this.state.guardianData.guardianname || ''} placeholder="Guardian Name" required /><br />
                                         <label htmlFor="guardianphone">Guardian Number: </label>
-                                        <input type="Text" id="guardianphone" name="guardianphone" defaultValue={this.state.guardianData.guardianphone || ''} placeholder="Phone number" required /><br />
+                                        <input type="number" id="guardianphone" name="guardianphone" defaultValue={this.state.guardianData.guardianphone || ''} placeholder="Phone number" required /><br />
                                         <button id="btnSubmit" className="blueonwhite" type="submit">Update Guardian's Info</button>
                                     </form>
                                 </div>

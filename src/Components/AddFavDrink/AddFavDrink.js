@@ -5,6 +5,7 @@ import { read_cookie } from 'sfcookies';
 import config from '../../config';
 import engine from '../../engine';
 import Checkbox from '../Checkbox/Checkbox';
+import Popup from '../Popup/Popup';
 
 export default class AddFavDrink extends Component {
 
@@ -19,8 +20,15 @@ export default class AddFavDrink extends Component {
             selectedDrinks: [],
             drinkuserslinkData: [],
             error: null,
-            isLoading: true
+            isLoading: true,
+            showPopup: false,
         }
+    }
+
+    togglePopup = () => {
+        this.setState({
+            showPopup: !this.state.showPopup
+        });
     }
 
     setDrinkData = drinkData => {
@@ -93,7 +101,6 @@ export default class AddFavDrink extends Component {
         else {
             this.state.selectedDrinks.push(drink);
         }
-        console.log(this.state.selectedDrinks);
     }
 
     createCheckbox = drink => (
@@ -131,7 +138,6 @@ export default class AddFavDrink extends Component {
         const { drinkname, drinkalcoholvalue } = e.target;
 
         if (drinkname.value !== "" | drinkalcoholvalue.value !== "") {
-            console.log("entered if statement");
             //setup drink
             const drink = {
                 drinkname: drinkname.value,
@@ -157,7 +163,6 @@ export default class AddFavDrink extends Component {
                 })
 
                 .then(data => {
-                    console.log(data);
                     drinkname.value = '';
                     drinkalcoholvalue.value = '';
                     this.addDrink(data);
@@ -172,7 +177,7 @@ export default class AddFavDrink extends Component {
             this.setState({ error: null })
         }
         else {
-            console.log("form is empty")
+            this.setState({ error:"Please fill all information" })
         }
     }
 
@@ -231,14 +236,22 @@ export default class AddFavDrink extends Component {
                         })
                 })
 
+                .then(
+                    this.togglePopup.bind(this)
+                )
+
                 .catch(error => {
                     console.error(error)
                     this.setState({ error })
                 })
 
         }
+    }
 
-        //this.state.drinkuserslinkData.forEach(this.pushtodb)
+    showerror = () => {
+        if (this.state.error != null) {
+            return (<p>{this.state.error}</p>);
+        }
     }
 
     render() {
@@ -253,6 +266,7 @@ export default class AddFavDrink extends Component {
                                 <input type="Text" id="drinkalcoholvalue" name="drinkalcoholvalue" placeholder="Drink Alcohol Volume / Shot" title="Enter Drink Alcohol Volume" /><br />
                                 <button id="btnSubmit" className="blueonwhite" type="submit">Create New Drink</button>
                             </form>
+                            {this.showerror()}
                         </div>
                         <div className="col-2">
                             <form onSubmit={this.handelCreateLinkSubmit} >
@@ -263,6 +277,13 @@ export default class AddFavDrink extends Component {
                         </div>
                     </div>
                 </div>
+                {this.state.showPopup ?
+                    <Popup
+                        text='Info Updated'
+                        closePopup={this.togglePopup.bind(this)}
+                    />
+                    : null
+                }
             </div >
         )
     }

@@ -46,7 +46,6 @@ export default class SignedIn extends Component {
     //check if component loaded
     componentDidMount() {
         try {
-            console.log(this.state.userid)
             this.calculateconsumtion();
             this.fetchuser();
             this.fetchfavouritedrinks();
@@ -149,7 +148,6 @@ export default class SignedIn extends Component {
     //calucate alcohol consumption 
     calculateconsumtion = () => {
         let start = moment().subtract({ 'hours': 4, 'minutes': 0 }).format('YYYY-MM-DD HH:mm:ss');
-        //let end = moment().format('YYYY-MM-DD HH:mm:ss')
 
         let consumption = 0;
 
@@ -174,6 +172,7 @@ export default class SignedIn extends Component {
             //add drinkid from data to drinksid
             .then(data => {
                 data.map(drink => {
+                    console.log(drink)
                     if (drink.drinkid > 0) {
                         fetch(this.state.config.API_ENDPOINT + 'drink/' + drink.drinkid, {
                             method: 'GET',
