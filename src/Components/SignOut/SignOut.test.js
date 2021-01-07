@@ -10,7 +10,7 @@ it('renders without crashing', () => {
     ReactDOM.render(
         <BrowserRouter>
             <SignOut
-                handleLogOut={App.handleLogOut} />
+                handleLogOut={App.handleLogOut()} />
         </BrowserRouter>, div
     );
     ReactDOM.unmountComponentAtNode(div);
