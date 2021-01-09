@@ -11,6 +11,7 @@ export default class Bar extends Component {
         super(props)
 
         this.state = {
+            dataDrinkUserIds: this.props.dataDrinkUserIds,
             drinkData: [],
             config: config
         }
@@ -23,8 +24,7 @@ export default class Bar extends Component {
     }
 
     fetchDrinkData = () => {
-        
-        this.props.dataDrinkUserIds.forEach(drink => {
+        this.state.dataDrinkUserIds.forEach(drink => {
             fetch(this.state.config.API_ENDPOINT + 'drink/' + drink.drinkid, {
                 method: 'GET',
                 headers: {
@@ -60,7 +60,7 @@ export default class Bar extends Component {
         
         let barcontent;
 
-        if (!this.props.dataDrinkUserIds) {
+        if (!this.state.dataDrinkUserIds) {
             return null;
         }
 
@@ -74,7 +74,7 @@ export default class Bar extends Component {
             }, {})
         );
 
-        if (this.state.drinkData.length === this.props.dataDrinkUserIds.length) {
+        if (this.state.drinkData.length === this.state.dataDrinkUserIds.length) {
             barcontent = <div className="column content">
 
                 <div className="row center">

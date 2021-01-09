@@ -105,13 +105,13 @@ export default class CallGuardianBtn extends Component {
 
 
     componentDidMount() {
-        try {
-            this.fetchuserguardianlink();
-            this.setIsLoading(false);
-        }
-        catch (e) {
-            //console.log(e) 
-        }
+            try {
+                this.fetchuserguardianlink();
+                this.setIsLoading(false);
+            }
+            catch (e) {
+                //console.log(e) 
+            }
     }
 
     render() {
