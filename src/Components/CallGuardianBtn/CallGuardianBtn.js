@@ -126,7 +126,7 @@ export default class CallGuardianBtn extends Component {
                 <div className="light">
                     <div className="column content">
                         <div className="row center">
-                            <a href={"tel:" + this.state.guardianData.guardianphone} className="bigredbutton" type="submit">{this.state.btnMessage}</a>
+                            <a href={"tel:" + this.state.guardianData.guardianphone} className="bigredbutton">{this.state.btnMessage}</a>
                         </div>
                     </div>
                 </div>

@@ -3,11 +3,14 @@
     "",
     "\\src",
     "\\src\\Components",
+    "\\src\\Components\\AddDrinkBtn",
     "\\src\\Components\\CallGuardianBtn",
-    "\\src\\Components\\SignedIn",
-    "\\src\\Components\\SignOut",
-    "\\src\\Components\\SignUp"
+    "\\src\\Components\\Footer",
+    "\\src\\Components\\Loader",
+    "\\src\\Components\\Nav",
+    "\\src\\fonts",
+    "\\src\\Images"
   ],
-  "SelectedNode": "\\src\\config.js",
+  "SelectedNode": "\\src\\Components\\Loader\\Loader.js",
   "PreviewInSolutionExplorer": false
 }

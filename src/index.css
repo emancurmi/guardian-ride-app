@@ -352,6 +352,10 @@ footer {
         font-size: 1rem;
     }
 
+    .footer textarea{
+        width: 150px;
+    }
+
 .footer .column {
     display: inline-block;
 }

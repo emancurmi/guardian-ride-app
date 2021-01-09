@@ -27,7 +27,7 @@ export default class Footer extends Component {
                                 <label htmlFor="contactemail">E-mail: </label>
                                 <input type="email" title="contact_email" id="contactemail" placeholder="E-mail" /><br />
                                 <label htmlFor="comment">Comment: </label>
-                                <input type="text" title="comment" id="comment" placeholder="Comment" rows="5" /><br />
+                                <textarea  type="text" title="comment" id="comment" placeholder="Comment" rows="5" /><br />
                                 <button className="blue">Submit</button>
                             </form>
                         </div>
