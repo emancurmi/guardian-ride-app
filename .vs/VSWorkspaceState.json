@@ -3,14 +3,8 @@
     "",
     "\\src",
     "\\src\\Components",
-    "\\src\\Components\\AddDrinkBtn",
-    "\\src\\Components\\CallGuardianBtn",
-    "\\src\\Components\\Footer",
-    "\\src\\Components\\Loader",
-    "\\src\\Components\\Nav",
-    "\\src\\fonts",
-    "\\src\\Images"
+    "\\src\\Components\\CallGuardianBtn"
   ],
-  "SelectedNode": "\\src\\Components\\Loader\\Loader.js",
+  "SelectedNode": "\\src\\Winged-Circle---Small.jpg",
   "PreviewInSolutionExplorer": false
 }
