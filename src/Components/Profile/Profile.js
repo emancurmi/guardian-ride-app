@@ -111,7 +111,7 @@ export default class Profile extends Component {
             //    return res.json().parse;
             //})
             .then(data => {
-                if (data.guardianid != undefined) {
+                if (data.guardianid !== undefined) {
                     this.setGuardianId(data.guardianid);
                     this.fetchguardian();
                 }
