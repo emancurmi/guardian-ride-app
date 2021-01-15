@@ -3,8 +3,10 @@
     "",
     "\\src",
     "\\src\\Components",
-    "\\src\\Components\\CallGuardianBtn"
+    "\\src\\Components\\Bar",
+    "\\src\\Components\\CallGuardianBtn",
+    "\\src\\Components\\SignOut"
   ],
-  "SelectedNode": "\\src\\Winged-Circle---Small.jpg",
+  "SelectedNode": "\\src\\config.js",
   "PreviewInSolutionExplorer": false
 }

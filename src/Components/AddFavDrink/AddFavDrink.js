@@ -264,8 +264,8 @@ export default class AddFavDrink extends Component {
                         <div className="col-2">
                             <form onSubmit={this.handleCreateDrinkSubmit} >
                                 <h3>1. Create New Drink</h3>
-                                <input type="Text" id="drinkname" name="drinkname" placeholder="Drink Name" pattern="[A-Za-z]+" title="Drink name should be made up of Capital and small letters Only" /><br />
-                                <input type="Text" id="drinkalcoholvalue" name="drinkalcoholvalue" placeholder="Drink Alcohol Volume / Shot" title="Enter Drink Alcohol Volume" /><br />
+                                <input type="Text" id="drinkname" name="drinkname" placeholder="Drink Name" pattern="[A-Za-z\s]+" title="Drink name should be made up of Capital and small letters Only" /><br />
+                                <input type="Text" id="drinkalcoholvalue" name="drinkalcoholvalue" pattern="[1-9]" placeholder="Drink Alcohol Volume / Shot" title="Enter Drink Alcohol Volume" /><br />
                                 <button id="btnSubmit" className="blueonwhite" type="submit">Create New Drink</button>
                             </form>
                             {this.showerror()}

@@ -251,7 +251,6 @@ export default class SignedIn extends Component {
                         </div>
                     </div>
                     <Bar dataDrinkUserIds={this.state.dataDrinkUserIds} selectedDrinks={this.state.selectedDrinks} toggleCheckbox={this.toggleCheckbox} />
-                    {console.log("data drink user ids: " + this.state.dataDrinkUserIds + " selected drinks: " + this.state.selectedDrinks + " toglecheckbox" + this.toggleCheckbox)}
                     {this.renderDrinkButton()}
 
                     {this.state.showPopup ?
