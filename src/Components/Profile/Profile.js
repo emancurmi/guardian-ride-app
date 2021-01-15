@@ -104,15 +104,17 @@ export default class Profile extends Component {
                 'Authorization': `Bearer ${this.state.config.API_TOKEN}`
             }
         })
-            .then(res => {
-                if (!res.ok) {
-                    return res.json().then(error => Promise.reject(error))
-                }
-                return res.json()
-            })
+            //.then(res => {
+            //    if (!res.ok) {
+            //        return res.json().then(error => Promise.reject(error));
+            //    }
+            //    return res.json().parse;
+            //})
             .then(data => {
-                this.setGuardianId(data.guardianid);
-                this.fetchguardian();
+                if (data.guardianid != undefined) {
+                    this.setGuardianId(data.guardianid);
+                    this.fetchguardian();
+                }
             })
             .catch(error => {
                 console.error(error)
