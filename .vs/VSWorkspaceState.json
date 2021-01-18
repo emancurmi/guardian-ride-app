@@ -2,11 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\Components",
-    "\\src\\Components\\Bar",
-    "\\src\\Components\\CallGuardianBtn",
-    "\\src\\Components\\SignOut"
+    "\\src\\Components"
   ],
-  "SelectedNode": "\\src\\config.js",
+  "SelectedNode": "\\src\\Components\\Nav",
   "PreviewInSolutionExplorer": false
 }

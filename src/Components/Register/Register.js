@@ -81,7 +81,6 @@ export default class Register extends Component {
             })
 
             .catch(error => {
-                console.error(error);
                 this.setState({ error: "Phone Number is Registered" });
             })
     }

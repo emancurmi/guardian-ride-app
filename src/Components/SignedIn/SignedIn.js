@@ -52,8 +52,8 @@ export default class SignedIn extends Component {
             this.fetchfavouritedrinks();
             if (this.props.showPopup === true) { this.togglePopup.bind(this) }
         }
-        catch (e) {
-            //console.log(e)
+        catch (error) {
+            this.setState({ error })
         }
     }
 

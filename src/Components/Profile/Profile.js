@@ -89,7 +89,7 @@ export default class Profile extends Component {
                 this.setUserData(data)
             })
             .catch(error => {
-                console.error(error)
+                //console.error(error)
                 this.setState({ error })
             })
         this.setIsLoading(false);
@@ -117,7 +117,7 @@ export default class Profile extends Component {
                 }
             })
             .catch(error => {
-                console.error(error)
+                //console.error(error)
                 this.setState({ error })
             })
         this.setIsLoading(false);
@@ -143,7 +143,7 @@ export default class Profile extends Component {
                     this.setGuardianData(data)
                 })
                 .catch(error => {
-                    console.error(error)
+                    //console.error(error)
                     this.setState({ error })
                 })
         }
@@ -188,8 +188,7 @@ export default class Profile extends Component {
             )
 
             .catch(error => {
-                console.error(error)
-                this.setState({ error })
+                this.setState({ error: "User Info can't be Changed." });
             })
 
 
@@ -263,7 +262,7 @@ export default class Profile extends Component {
                 )
 
                 .catch(error => {
-                    console.error(error);
+                    //console.error(error);
                     this.setState({ error })
                 })
 
@@ -288,11 +287,18 @@ export default class Profile extends Component {
                 )
 
                 .catch(error => {
-                    console.error(error)
+                    //console.error(error)
                     this.setState({ error })
+
                 })
         }
         this.setIsLoading(false);
+    }
+
+    showerror = () => {
+        if (this.state.error != null) {
+            return (<p>{this.state.error}</p>);
+        }
     }
 
     componentDidMount() {
@@ -300,8 +306,8 @@ export default class Profile extends Component {
             this.fetchuser();
             this.fetchuserguardianlink();
         }
-        catch (e) {
-            //console.log(e)
+        catch (error) {
+            this.setState({ error })
         }
     }
 
@@ -332,7 +338,9 @@ export default class Profile extends Component {
                                         <label htmlFor="userpin">Your Pin: </label>
                                         <input type="number" id="userpin" name="userpin" defaultValue={this.state.userData.userpin || ''} placeholder="PIN number" required /><br />
                                         <button id="btnSubmit" className="blueonwhite" type="submit">Update User Info</button>
+
                                     </form>
+                                    {this.showerror()}
                                 </div>
                             </div>
 
